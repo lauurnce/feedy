@@ -6,3 +6,7 @@ sources = ["hackernews", "anthropic", "openai"]
 
 # Digest format: "markdown" (default) or "plain".
 output_format = "markdown"
+
+[anthropic]
+# Used for AI summaries.
+api_key = ""
