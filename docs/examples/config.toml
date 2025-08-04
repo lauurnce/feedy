@@ -3,3 +3,6 @@
 
 # Which sources to fetch and include in the digest.
 sources = ["hackernews", "anthropic", "openai"]
+
+# Digest format: "markdown" (default) or "plain".
+output_format = "markdown"
