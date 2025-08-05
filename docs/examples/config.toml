@@ -15,3 +15,4 @@ api_key = ""
 [slack]
 # Incoming webhook used by `feedy digest --slack`.
 webhook_url = ""
+# The FEEDY_SLACK_WEBHOOK environment variable takes precedence over this value.
