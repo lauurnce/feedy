@@ -11,3 +11,7 @@ output_format = "markdown"
 # Used for AI summaries.
 api_key = ""
 # The ANTHROPIC_API_KEY environment variable takes precedence over this value.
+
+[slack]
+# Incoming webhook used by `feedy digest --slack`.
+webhook_url = ""
