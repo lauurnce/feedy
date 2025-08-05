@@ -10,3 +10,4 @@ output_format = "markdown"
 [anthropic]
 # Used for AI summaries.
 api_key = ""
+# The ANTHROPIC_API_KEY environment variable takes precedence over this value.
