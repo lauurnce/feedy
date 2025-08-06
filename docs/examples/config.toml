@@ -21,3 +21,6 @@ webhook_url = ""
 # SMTP settings used by `feedy digest --email`.
 host = "smtp.example.com"
 port = 587
+sender = "feedy@example.com"
+recipient = "you@example.com"
+# FEEDY_SMTP_PASSWORD takes precedence over a password set here.
