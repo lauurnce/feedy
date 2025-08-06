@@ -16,3 +16,8 @@ api_key = ""
 # Incoming webhook used by `feedy digest --slack`.
 webhook_url = ""
 # The FEEDY_SLACK_WEBHOOK environment variable takes precedence over this value.
+
+[email]
+# SMTP settings used by `feedy digest --email`.
+host = "smtp.example.com"
+port = 587
