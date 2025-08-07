@@ -11,3 +11,8 @@ Storage tests use an autouse `isolated_db` fixture that monkeypatches
 
 The suite runs fully offline. Source tests stub the transport rather than
 fetching, which keeps runs fast and deterministic.
+
+## Naming
+
+Test names describe the behaviour asserted, so a failure reads as a sentence.
+One test file per module under test.
