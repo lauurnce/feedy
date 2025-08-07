@@ -40,3 +40,10 @@ def test_get_entries_combines_source_and_since_with_and():
 
 def test_get_stats_returns_empty_mapping_on_fresh_database():
     assert storage.get_stats() == {}
+
+
+def test_get_stats_counts_entries_per_source():
+    storage.save(_entry("https://a.com", source="openai"))
+    storage.save(_entry("https://b.com", source="openai"))
+    storage.save(_entry("https://c.com", source="meta"))
+    assert storage.get_stats() == {"meta": 1, "openai": 2}
