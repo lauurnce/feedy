@@ -28,3 +28,11 @@ def test_get_entries_filters_by_since_date():
     storage.save(_entry("https://new.com", date="2026-06-01"))
     rows = storage.get_entries(since="2026-05-01")
     assert [r["url"] for r in rows] == ["https://new.com"]
+
+
+def test_get_entries_combines_source_and_since_with_and():
+    storage.save(_entry("https://a.com", source="openai", date="2026-01-01"))
+    storage.save(_entry("https://b.com", source="openai", date="2026-06-01"))
+    storage.save(_entry("https://c.com", source="meta", date="2026-06-01"))
+    rows = storage.get_entries(source="openai", since="2026-05-01")
+    assert [r["url"] for r in rows] == ["https://b.com"]
