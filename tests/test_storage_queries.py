@@ -21,3 +21,10 @@ def test_get_entries_filters_by_source():
     storage.save(_entry("https://b.com", source="openai"))
     rows = storage.get_entries(source="openai")
     assert [r["url"] for r in rows] == ["https://b.com"]
+
+
+def test_get_entries_filters_by_since_date():
+    storage.save(_entry("https://old.com", date="2026-01-01"))
+    storage.save(_entry("https://new.com", date="2026-06-01"))
+    rows = storage.get_entries(since="2026-05-01")
+    assert [r["url"] for r in rows] == ["https://new.com"]
