@@ -36,3 +36,7 @@ def test_get_entries_combines_source_and_since_with_and():
     storage.save(_entry("https://c.com", source="meta", date="2026-06-01"))
     rows = storage.get_entries(source="openai", since="2026-05-01")
     assert [r["url"] for r in rows] == ["https://b.com"]
+
+
+def test_get_stats_returns_empty_mapping_on_fresh_database():
+    assert storage.get_stats() == {}
