@@ -47,3 +47,7 @@ def test_get_stats_counts_entries_per_source():
     storage.save(_entry("https://b.com", source="openai"))
     storage.save(_entry("https://c.com", source="meta"))
     assert storage.get_stats() == {"meta": 1, "openai": 2}
+
+
+def test_update_summary_returns_false_for_unknown_url():
+    assert storage.update_summary("https://missing.com", "text") is False
