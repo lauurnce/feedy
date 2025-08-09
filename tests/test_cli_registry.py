@@ -6,3 +6,7 @@ def test_build_sources_instantiates_known_names():
     sources = _build_sources(["hackernews"])
     assert len(sources) == 1
     assert isinstance(sources[0], HackerNewsSource)
+
+
+def test_build_sources_skips_unregistered_names():
+    assert _build_sources(["nope"]) == []
