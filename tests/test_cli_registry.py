@@ -10,3 +10,8 @@ def test_build_sources_instantiates_known_names():
 
 def test_build_sources_skips_unregistered_names():
     assert _build_sources(["nope"]) == []
+
+
+def test_build_sources_preserves_requested_order():
+    names = [s.name for s in _build_sources(["openai", "hackernews"])]
+    assert names == ["openai", "hackernews"]
