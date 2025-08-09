@@ -15,3 +15,7 @@ def test_is_valid_rejects_entry_without_url():
 
 def test_is_valid_rejects_entry_without_title():
     assert BaseFeedSource._is_valid(_entry(title="")) is False
+
+
+def test_is_valid_rejects_entry_missing_both_keys():
+    assert BaseFeedSource._is_valid({}) is False
