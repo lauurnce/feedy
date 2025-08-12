@@ -18,5 +18,5 @@
 - Any SQLite client can open the file directly, which makes ad-hoc debugging easy.
 - There is no implicit cleanup. Removing data is always a deliberate, separate action.
 - Concurrent writers are out of scope. The tool assumes one process at a time.
-- Internal row ids stay internal. Callers identify entries by their upstream id.
+- Internal row ids stay internal. Callers identify entries by url.
 - Backing up means copying one file. Do it before any manual schema surgery.
