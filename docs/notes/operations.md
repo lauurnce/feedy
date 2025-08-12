@@ -9,7 +9,7 @@
 - A routine run never migrates schema or deletes data; both are explicit manual actions.
 - Rotating a credential means updating the environment; no code or database change is needed.
 - Storage grows monotonically. Check the file size occasionally rather than assuming it is small.
-- Writes key on upstream id, so running fetch twice in a row changes nothing.
+- Writes key on url, so running fetch twice in a row changes nothing.
 - An upstream outage is reported and skipped; it is not a reason to fail the whole run.
 - Each run ends with a one-line summary of entries added per source.
 - Text entries are small; the database stays modest until backfill is used aggressively.
