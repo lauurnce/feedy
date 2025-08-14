@@ -6,7 +6,7 @@
 - Precedence runs flags first, then the config file, then defaults.
 - Environment variables override file values, which suits containers and scheduled jobs.
 - Supply secrets through the environment; never write a token into the config file.
-- Point the database path wherever you like; the CLI and tests can use different files.
+- The database lives at `~/.feedy/feedy.db`; the path is a module constant, not a config key.
 - Source settings are prefixed with the source name, so one flat file has no collisions.
 - Enable a source in config rather than editing code; registration and activation are separate.
 - Summarisation is off until a provider is configured, and the tool works fully without it.
