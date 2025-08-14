@@ -4,7 +4,7 @@
 - By default a digest covers the most recent run, which suits a fetch-then-digest schedule.
 - Widen the window explicitly when you want a weekly roundup rather than a per-run summary.
 - Formats are selected by name, so adding one never changes how the command is invoked.
-- Plain text is the default and stays readable in a terminal or a plain-text email.
+- Markdown is the default output format; `plain` is the alternative.
 - HTML output escapes entry content, since upstream bodies are untrusted markup.
 - Entries are grouped by source, with a heading showing the source name and its item count.
 - Within each group entries run newest first, so the freshest item is read first.
