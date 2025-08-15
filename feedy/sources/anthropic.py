@@ -76,6 +76,7 @@ class AnthropicSource(BaseFeedSource):
 
 
 def _parse_date(el) -> str:
+    """Coerce the article timestamp to an ISO date, or empty string on failure."""
     if el is None:
         return ""
     try:
