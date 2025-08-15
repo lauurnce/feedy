@@ -1,3 +1,5 @@
+"""Thin Anthropic API client used by the summariser."""
+
 from __future__ import annotations
 
 import os
