@@ -1,3 +1,5 @@
+"""SQLite persistence for feed entries, deduplicated on the url column."""
+
 import sqlite3
 from pathlib import Path
 
