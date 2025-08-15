@@ -1,3 +1,5 @@
+"""Digest delivery channels: Slack webhook and SMTP email."""
+
 from __future__ import annotations
 
 import smtplib
