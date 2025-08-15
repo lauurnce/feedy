@@ -1,3 +1,5 @@
+"""Read-only JSON API exposing stored entries."""
+
 from __future__ import annotations
 
 from datetime import datetime
