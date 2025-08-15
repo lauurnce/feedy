@@ -1,3 +1,5 @@
+"""Generates three-sentence summaries for entries that lack one."""
+
 from __future__ import annotations
 
 from feedy.ai import complete
