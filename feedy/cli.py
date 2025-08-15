@@ -1,3 +1,5 @@
+"""Click command line interface: fetch, list, digest, sources and stats."""
+
 import os
 import sys
 
