@@ -1,3 +1,5 @@
+"""Renders stored entries into a markdown or plain text digest."""
+
 from __future__ import annotations
 
 from collections import defaultdict
