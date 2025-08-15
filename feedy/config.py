@@ -1,3 +1,5 @@
+"""TOML configuration loading with dataclass-backed defaults."""
+
 from __future__ import annotations
 
 import tomllib
