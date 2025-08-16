@@ -70,6 +70,7 @@ class MetaSource(BaseFeedSource):
 
 
 def _parse_date(raw: str) -> str:
+    """Coerce the post timestamp to an ISO date, or empty string on failure."""
     try:
         return datetime.strptime(raw.title(), "%B %d, %Y").strftime("%Y-%m-%d")
     except ValueError:
