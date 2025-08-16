@@ -62,6 +62,7 @@ class TelegramSource(BaseFeedSource):
 
 
 def _parse_date(raw: str) -> str:
+    """Coerce the post timestamp to an ISO date, or empty string on failure."""
     for fmt in ("%B %d, %Y", "%d %B %Y"):
         try:
             return datetime.strptime(raw, fmt).strftime("%Y-%m-%d")
