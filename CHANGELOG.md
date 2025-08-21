@@ -11,3 +11,4 @@ All notable changes to this project are recorded here.
 - Hacker News source scraping the front page.
 - Anthropic and OpenAI news sources.
 - Meta, Telegram, TikTok and X changelog sources.
+- `fetch` command pulling every configured source.
