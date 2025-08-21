@@ -13,3 +13,4 @@ All notable changes to this project are recorded here.
 - Meta, Telegram, TikTok and X changelog sources.
 - `fetch` command pulling every configured source.
 - `list` command with `--limit` to cap output rows.
+- `sources` command listing registered source names.
