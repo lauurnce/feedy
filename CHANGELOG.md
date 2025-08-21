@@ -12,3 +12,4 @@ All notable changes to this project are recorded here.
 - Anthropic and OpenAI news sources.
 - Meta, Telegram, TikTok and X changelog sources.
 - `fetch` command pulling every configured source.
+- `list` command with `--limit` to cap output rows.
