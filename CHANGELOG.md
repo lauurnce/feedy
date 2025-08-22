@@ -14,3 +14,4 @@ All notable changes to this project are recorded here.
 - `fetch` command pulling every configured source.
 - `list` command with `--limit` to cap output rows.
 - `sources` command listing registered source names.
+- `stats` command reporting entry counts per source.
