@@ -16,3 +16,4 @@ All notable changes to this project are recorded here.
 - `sources` command listing registered source names.
 - `stats` command reporting entry counts per source.
 - `digest` command with `--format` for markdown or plain output.
+- Anthropic-backed summariser producing three-sentence summaries.
