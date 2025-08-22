@@ -15,3 +15,4 @@ All notable changes to this project are recorded here.
 - `list` command with `--limit` to cap output rows.
 - `sources` command listing registered source names.
 - `stats` command reporting entry counts per source.
+- `digest` command with `--format` for markdown or plain output.
