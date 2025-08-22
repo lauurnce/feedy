@@ -17,3 +17,4 @@ All notable changes to this project are recorded here.
 - `stats` command reporting entry counts per source.
 - `digest` command with `--format` for markdown or plain output.
 - Anthropic-backed summariser producing three-sentence summaries.
+- Slack delivery via `digest --slack`.
