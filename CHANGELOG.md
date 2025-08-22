@@ -20,3 +20,4 @@ All notable changes to this project are recorded here.
 - Slack delivery via `digest --slack`.
 - Email delivery via `digest --email` over SMTP.
 - Read-only JSON API serving stored entries.
+- TOML configuration at `~/.feedy/config.toml` with env var precedence.
