@@ -19,3 +19,4 @@ All notable changes to this project are recorded here.
 - Anthropic-backed summariser producing three-sentence summaries.
 - Slack delivery via `digest --slack`.
 - Email delivery via `digest --email` over SMTP.
+- Read-only JSON API serving stored entries.
