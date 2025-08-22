@@ -22,3 +22,7 @@ All notable changes to this project are recorded here.
 - Read-only JSON API serving stored entries.
 - TOML configuration at `~/.feedy/config.toml` with env var precedence.
 - Scheduled daily fetch workflow with database caching between runs.
+
+### Notes
+
+- Entry timestamps are ISO 8601 calendar dates, not full timestamps.
