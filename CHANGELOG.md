@@ -18,3 +18,4 @@ All notable changes to this project are recorded here.
 - `digest` command with `--format` for markdown or plain output.
 - Anthropic-backed summariser producing three-sentence summaries.
 - Slack delivery via `digest --slack`.
+- Email delivery via `digest --email` over SMTP.
