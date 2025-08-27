@@ -103,3 +103,4 @@ class ExampleSource(BaseFeedSource):
 - Document new public functions with a one-line docstring in the same commit.
 - Update `CHANGELOG.md` under Unreleased when behaviour changes.
 - Keep `docs/notes/` accurate; a wrong note costs more than a missing one.
+- Run `ruff check .` before pushing if you have it installed.
