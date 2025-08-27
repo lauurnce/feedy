@@ -15,5 +15,5 @@
 - Schema changes are forward-only and additive wherever a default can be supplied.
 - Tags are deliberately absent until there is a second consumer that actually needs them.
 - Stored entries are not edited. New information arrives as a new row, preserving history.
-- Upstream ids are unique per source, not globally, so dedup keys on the pair.
+- Urls are unique globally, not per source, enforced by the UNIQUE constraint on entries.url.
 - Adding a field means a migration, a default, a test and a line in these notes.
