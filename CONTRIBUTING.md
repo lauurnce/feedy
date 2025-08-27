@@ -104,3 +104,4 @@ class ExampleSource(BaseFeedSource):
 - Update `CHANGELOG.md` under Unreleased when behaviour changes.
 - Keep `docs/notes/` accurate; a wrong note costs more than a missing one.
 - Run `ruff check .` before pushing if you have it installed.
+- Never commit credentials; `.env.example` lists every variable the tool reads.
