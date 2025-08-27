@@ -100,3 +100,4 @@ class ExampleSource(BaseFeedSource):
 - Prefix commits with a type and a module scope, e.g. `feat(storage):`.
 - Run `make test` before pushing; the suite is offline and takes seconds.
 - Keep one logical change per commit; if the message needs "and", split it.
+- Document new public functions with a one-line docstring in the same commit.
