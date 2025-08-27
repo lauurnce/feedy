@@ -10,3 +10,7 @@ Two trees: `guide/` is user-facing, `notes/` records internal conventions.
 - [Available sources](guide/sources.md)
 - [Working with digests](guide/digests.md)
 - [FAQ](guide/faq.md)
+
+## Notes
+
+Internal conventions per subsystem, plus architecture, security and design decisions.
