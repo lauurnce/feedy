@@ -101,3 +101,4 @@ class ExampleSource(BaseFeedSource):
 - Run `make test` before pushing; the suite is offline and takes seconds.
 - Keep one logical change per commit; if the message needs "and", split it.
 - Document new public functions with a one-line docstring in the same commit.
+- Update `CHANGELOG.md` under Unreleased when behaviour changes.
