@@ -10,3 +10,4 @@
 - `stats` shows how many entries each source has contributed, which is the quickest health check.
 - `digest` renders stored entries for the current window without changing anything on disk.
 - `digest --format` selects the renderer when you want something other than the plain text default.
+- Everything lives in a single SQLite file, so backing up your data means copying one file.
