@@ -12,3 +12,4 @@
 - `digest --format` selects the renderer when you want something other than the plain text default.
 - Everything lives in a single SQLite file, so backing up your data means copying one file.
 - Configuration is optional; without a config file the defaults are enough for a first run.
+- Sources needing credentials read them from the environment, so nothing secret goes into a file.
