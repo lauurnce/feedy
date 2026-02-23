@@ -14,3 +14,4 @@
 - Configuration is optional; without a config file the defaults are enough for a first run.
 - Sources needing credentials read them from the environment, so nothing secret goes into a file.
 - The suite runs offline in a couple of seconds and is the fastest way to check a change.
+- Schedule the same command you run by hand; there is no daemon or special unattended mode.
