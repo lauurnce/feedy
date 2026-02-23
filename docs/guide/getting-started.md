@@ -5,3 +5,4 @@
 - Install from the committed lockfile so your versions match the ones the tests run against.
 - Run `sources` first. If it prints the registered source names, the install is working.
 - `fetch` pulls from every registered source and writes new items into the local database.
+- `list` prints what has been stored, newest first, so you can confirm the fetch did something.
