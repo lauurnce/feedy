@@ -18,3 +18,4 @@
 - Pull, reinstall from the lockfile, then run the tests before your next scheduled fetch.
 - Copy the database file while no run is in progress; that is the whole backup procedure.
 - To start fresh, move the database file aside; the next fetch creates a new one.
+- Once a fetch works, the commands reference covers everything the CLI can do.
