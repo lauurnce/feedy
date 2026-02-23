@@ -16,3 +16,4 @@
 - The suite runs offline in a couple of seconds and is the fastest way to check a change.
 - Schedule the same command you run by hand; there is no daemon or special unattended mode.
 - Pull, reinstall from the lockfile, then run the tests before your next scheduled fetch.
+- Copy the database file while no run is in progress; that is the whole backup procedure.
