@@ -8,3 +8,4 @@
 - `list` prints what has been stored, newest first, so you can confirm the fetch did something.
 - Add `--limit` to `list` when you only want to glance at the most recent handful of entries.
 - `stats` shows how many entries each source has contributed, which is the quickest health check.
+- `digest` renders stored entries for the current window without changing anything on disk.
