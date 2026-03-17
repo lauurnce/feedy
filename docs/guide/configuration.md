@@ -11,3 +11,4 @@
 - Enable a source in config rather than editing code; registration and activation are separate.
 - Summarisation is off until a provider is configured, and the tool works fully without it.
 - Configure zero or more delivery channels; with none configured a run simply delivers nothing.
+- The digest window defaults to the most recent run and can be widened explicitly.
