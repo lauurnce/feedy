@@ -6,3 +6,4 @@
 - `list --limit N` — cap the output at N rows; omit it to print everything matched.
 - `stats` — show how many entries each source has contributed.
 - `sources` — list every registered source name.
+- `digest` — render stored entries for a window as a readable summary.
