@@ -12,3 +12,4 @@
 - Every command supports `--help`, which prints its options and a one-line description.
 - Output stays readable when piped or redirected; no command requires a terminal.
 - A successful run prints results only, which keeps scheduled job logs short.
+- No command prompts for input, so every one of them is safe to run unattended.
