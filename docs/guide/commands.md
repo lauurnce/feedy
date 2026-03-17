@@ -8,3 +8,4 @@
 - `sources` — list every registered source name.
 - `digest` — render stored entries for a window as a readable summary.
 - `digest --format NAME` — choose the renderer; plain text is the default.
+- Commands exit non-zero on failure so they compose properly inside shell scripts.
