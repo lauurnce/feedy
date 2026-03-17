@@ -14,3 +14,4 @@
 - The digest window defaults to the most recent run and can be widened explicitly.
 - Set a default output format in config so routine runs need no extra flag.
 - Config is validated at startup, so a typo fails immediately rather than midway through a run.
+- An unknown key produces a warning rather than an error, so older configs keep working.
