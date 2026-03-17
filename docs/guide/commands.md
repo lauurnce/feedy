@@ -5,3 +5,4 @@
 - `list` — print stored entries, most recent first.
 - `list --limit N` — cap the output at N rows; omit it to print everything matched.
 - `stats` — show how many entries each source has contributed.
+- `sources` — list every registered source name.
