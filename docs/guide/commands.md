@@ -7,3 +7,4 @@
 - `stats` — show how many entries each source has contributed.
 - `sources` — list every registered source name.
 - `digest` — render stored entries for a window as a readable summary.
+- `digest --format NAME` — choose the renderer; plain text is the default.
