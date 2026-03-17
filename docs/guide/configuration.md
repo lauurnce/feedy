@@ -15,3 +15,4 @@
 - Set a default output format in config so routine runs need no extra flag.
 - Config is validated at startup, so a typo fails immediately rather than midway through a run.
 - An unknown key produces a warning rather than an error, so older configs keep working.
+- When a setting seems ignored, print the resolved config; it is almost always a precedence surprise.
