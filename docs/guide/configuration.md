@@ -7,3 +7,4 @@
 - Environment variables override file values, which suits containers and scheduled jobs.
 - Supply secrets through the environment; never write a token into the config file.
 - Point the database path wherever you like; the CLI and tests can use different files.
+- Source settings are prefixed with the source name, so one flat file has no collisions.
