@@ -10,3 +10,4 @@
 - `digest --format NAME` — choose the renderer; plain text is the default.
 - Commands exit non-zero on failure so they compose properly inside shell scripts.
 - Every command supports `--help`, which prints its options and a one-line description.
+- Output stays readable when piped or redirected; no command requires a terminal.
