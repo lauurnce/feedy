@@ -5,3 +5,4 @@
 - Every setting has a built-in default, so a missing config file still produces a working run.
 - Precedence runs flags first, then the config file, then defaults.
 - Environment variables override file values, which suits containers and scheduled jobs.
+- Supply secrets through the environment; never write a token into the config file.
