@@ -13,3 +13,4 @@
 - Output stays readable when piped or redirected; no command requires a terminal.
 - A successful run prints results only, which keeps scheduled job logs short.
 - No command prompts for input, so every one of them is safe to run unattended.
+- An explicit flag always wins over the config file, which in turn beats the built-in default.
