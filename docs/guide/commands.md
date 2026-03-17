@@ -11,3 +11,4 @@
 - Commands exit non-zero on failure so they compose properly inside shell scripts.
 - Every command supports `--help`, which prints its options and a one-line description.
 - Output stays readable when piped or redirected; no command requires a terminal.
+- A successful run prints results only, which keeps scheduled job logs short.
