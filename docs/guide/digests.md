@@ -6,3 +6,4 @@
 - Formats are selected by name, so adding one never changes how the command is invoked.
 - Plain text is the default and stays readable in a terminal or a plain-text email.
 - HTML output escapes entry content, since upstream bodies are untrusted markup.
+- Entries are grouped by source, with a heading showing the source name and its item count.
