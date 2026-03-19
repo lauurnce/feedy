@@ -9,3 +9,4 @@
 - Telegram — tracks configured channels; requires credentials.
 - TikTok — tracks configured accounts; requires credentials.
 - A source must be both registered and enabled in config before a fetch will use it.
+- Credentials come from the environment, named per source so several can coexist.
