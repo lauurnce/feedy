@@ -10,3 +10,4 @@
 - Within each group entries run newest first, so the freshest item is read first.
 - If nothing new arrived, the digest still renders with a short line saying so.
 - Delivery is separate from rendering, so you can print a digest without sending it anywhere.
+- The same entries always render identically, which makes digests easy to diff or test.
