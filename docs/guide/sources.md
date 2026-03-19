@@ -10,3 +10,4 @@
 - TikTok — tracks configured accounts; requires credentials.
 - A source must be both registered and enabled in config before a fetch will use it.
 - Credentials come from the environment, named per source so several can coexist.
+- Each source respects its upstream's rate limits internally; you do not need to throttle runs.
