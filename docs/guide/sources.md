@@ -5,3 +5,4 @@
 - Anthropic — tracks posts published by Anthropic.
 - OpenAI — tracks posts published by OpenAI.
 - Meta — tracks posts published by Meta.
+- X — tracks posts from configured accounts; requires credentials.
