@@ -4,3 +4,4 @@
 - By default a digest covers the most recent run, which suits a fetch-then-digest schedule.
 - Widen the window explicitly when you want a weekly roundup rather than a per-run summary.
 - Formats are selected by name, so adding one never changes how the command is invoked.
+- Plain text is the default and stays readable in a terminal or a plain-text email.
