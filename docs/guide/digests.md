@@ -8,3 +8,4 @@
 - HTML output escapes entry content, since upstream bodies are untrusted markup.
 - Entries are grouped by source, with a heading showing the source name and its item count.
 - Within each group entries run newest first, so the freshest item is read first.
+- If nothing new arrived, the digest still renders with a short line saying so.
