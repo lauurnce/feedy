@@ -8,3 +8,4 @@
 - X — tracks posts from configured accounts; requires credentials.
 - Telegram — tracks configured channels; requires credentials.
 - TikTok — tracks configured accounts; requires credentials.
+- A source must be both registered and enabled in config before a fetch will use it.
