@@ -7,3 +7,4 @@
 - Meta — tracks posts published by Meta.
 - X — tracks posts from configured accounts; requires credentials.
 - Telegram — tracks configured channels; requires credentials.
+- TikTok — tracks configured accounts; requires credentials.
