@@ -11,3 +11,4 @@
 - A source must be both registered and enabled in config before a fetch will use it.
 - Credentials come from the environment, named per source so several can coexist.
 - Each source respects its upstream's rate limits internally; you do not need to throttle runs.
+- To add a source: implement the base class, register a name, and add a test file beside it.
