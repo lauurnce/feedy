@@ -9,3 +9,4 @@
 - **Are old entries pruned?** No. Storage is append-only and nothing is removed automatically.
 - **Empty digest with data stored?** The window is probably wrong, not the data.
 - **Can it run unattended?** Yes. It never prompts and exits non-zero on failure.
+- **One source is down.** It is reported and skipped; the rest of the run continues.
