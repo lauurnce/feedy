@@ -18,3 +18,4 @@
 - **Do config changes need a restart?** No. Config is read fresh at the start of every run.
 - **A setting was ignored.** A flag or environment variable is probably overriding it.
 - **Output is too long.** Use `--limit` on `list`, or narrow the digest window.
+- **Do tests hit the network?** No. The suite is fully offline and deterministic.
