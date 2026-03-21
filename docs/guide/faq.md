@@ -16,3 +16,4 @@
 - **Can I expose the API publicly?** Not without a proxy handling authentication first.
 - **How do I start over?** Move the database file aside; the next fetch creates a fresh one.
 - **Do config changes need a restart?** No. Config is read fresh at the start of every run.
+- **A setting was ignored.** A flag or environment variable is probably overriding it.
