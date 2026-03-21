@@ -20,3 +20,4 @@
 - **Output is too long.** Use `--limit` on `list`, or narrow the digest window.
 - **Do tests hit the network?** No. The suite is fully offline and deterministic.
 - **Found a bug?** Open an issue with the command you ran and what you expected instead.
+- **Why was X built this way?** The design decisions notes record the reasoning.
