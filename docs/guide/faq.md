@@ -14,3 +14,4 @@
 - **Which sources exist?** Run `sources`; anything missing there is a registration problem.
 - **Can the API add entries?** No. It is read-only; fetch is the only way data enters.
 - **Can I expose the API publicly?** Not without a proxy handling authentication first.
+- **How do I start over?** Move the database file aside; the next fetch creates a fresh one.
