@@ -6,3 +6,4 @@
 - **Entries seem missing.** Usually the database path changed, not the data disappearing.
 - **Do I need an AI provider?** No. Summarisation is optional and everything works without it.
 - **How big does it get?** Text entries are small; growth is slow unless you backfill heavily.
+- **Are old entries pruned?** No. Storage is append-only and nothing is removed automatically.
