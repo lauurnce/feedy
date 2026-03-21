@@ -15,3 +15,4 @@
 - **Can the API add entries?** No. It is read-only; fetch is the only way data enters.
 - **Can I expose the API publicly?** Not without a proxy handling authentication first.
 - **How do I start over?** Move the database file aside; the next fetch creates a fresh one.
+- **Do config changes need a restart?** No. Config is read fresh at the start of every run.
