@@ -25,3 +25,4 @@ list.md
 repo-structure.md
 ROADMAP.md
 .ruff_cache/
+.mypy_cache/
