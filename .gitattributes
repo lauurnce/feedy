@@ -2,3 +2,4 @@
 *.py text diff=python
 *.md text
 *.yml text
+uv.lock linguist-generated=true
