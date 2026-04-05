@@ -13,3 +13,7 @@ labels: bug
 1. Command run:
 2. Config in use:
 3. What happened:
+
+## Expected behaviour
+
+<!-- What should have happened instead? -->
