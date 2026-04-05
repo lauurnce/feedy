@@ -17,3 +17,6 @@ digest:
 
 sources:
 	uv run feedy sources
+
+stats:
+	uv run feedy stats
