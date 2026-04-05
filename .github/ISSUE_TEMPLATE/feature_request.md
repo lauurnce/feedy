@@ -11,3 +11,7 @@ labels: enhancement
 ## Proposed solution
 
 <!-- What should the behaviour be? -->
+
+## Alternatives considered
+
+<!-- What else did you consider, and why not? -->
