@@ -97,3 +97,4 @@ class ExampleSource(BaseFeedSource):
 4. Open a pull request describing what and why.
 
 - Land the failing test in its own commit before the implementation that satisfies it.
+- Prefix commits with a type and a module scope, e.g. `feat(storage):`.
