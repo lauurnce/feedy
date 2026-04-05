@@ -20,3 +20,7 @@ sources:
 
 stats:
 	uv run feedy stats
+
+clean:
+	rm -rf .pytest_cache .ruff_cache .mypy_cache
+	find . -name __pycache__ -type d -exec rm -rf {} +
