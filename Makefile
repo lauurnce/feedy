@@ -11,3 +11,6 @@ test:
 
 fetch:
 	uv run feedy fetch
+
+digest:
+	uv run feedy digest
