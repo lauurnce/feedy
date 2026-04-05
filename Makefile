@@ -14,3 +14,6 @@ fetch:
 
 digest:
 	uv run feedy digest
+
+sources:
+	uv run feedy sources
