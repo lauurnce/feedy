@@ -95,3 +95,5 @@ class ExampleSource(BaseFeedSource):
 3. Use clear commit messages (this repo uses Conventional Commits, e.g.
    `feat(sources): add ExampleSource`).
 4. Open a pull request describing what and why.
+
+- Land the failing test in its own commit before the implementation that satisfies it.
