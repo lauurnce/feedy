@@ -17,3 +17,9 @@ labels: bug
 ## Expected behaviour
 
 <!-- What should have happened instead? -->
+
+## Environment
+
+- Python version:
+- feedy version:
+- OS:
