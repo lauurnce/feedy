@@ -98,3 +98,4 @@ class ExampleSource(BaseFeedSource):
 
 - Land the failing test in its own commit before the implementation that satisfies it.
 - Prefix commits with a type and a module scope, e.g. `feat(storage):`.
+- Run `make test` before pushing; the suite is offline and takes seconds.
