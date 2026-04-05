@@ -5,3 +5,7 @@
 ## Changes
 
 <!-- Bullet the notable changes. -->
+
+## Testing
+
+<!-- How was this verified? Paste the relevant output. -->
