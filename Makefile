@@ -8,3 +8,6 @@ install:
 
 test:
 	uv run pytest -q
+
+fetch:
+	uv run feedy fetch
