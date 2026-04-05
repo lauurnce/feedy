@@ -9,3 +9,9 @@
 ## Testing
 
 <!-- How was this verified? Paste the relevant output. -->
+
+## Checklist
+
+- [ ] Tests added or updated
+- [ ] `make test` passes
+- [ ] No unrelated files in the diff
