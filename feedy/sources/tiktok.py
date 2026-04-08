@@ -19,6 +19,7 @@ class TikTokSource(BaseFeedSource):
         return "tiktok"
 
     def fetch(self) -> list:
+        """Fetch the changelog HTML, returning an empty list on any transport error."""
         try:
             response = httpx.get(
                 _BLOG_URL,
