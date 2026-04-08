@@ -12,6 +12,7 @@ DEFAULT_OUTPUT_FORMAT = "markdown"
 
 @dataclass
 class EmailConfig:
+    """SMTP settings for email digest delivery; port defaults to 587."""
     host: str
     port: int = 587
     username: str | None = None
