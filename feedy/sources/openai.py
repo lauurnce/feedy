@@ -20,6 +20,7 @@ class OpenAISource(BaseFeedSource):
 
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "openai"
 
     def fetch(self) -> list:
