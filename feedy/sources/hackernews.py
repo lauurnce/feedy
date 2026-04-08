@@ -32,6 +32,7 @@ class HackerNewsSource(BaseFeedSource):
             return []
 
     def parse(self, raw: list) -> list[dict]:
+        """Extract title, url and date per story row, skipping rows with no title link."""
         if not raw:
             return []
         soup = BeautifulSoup(raw[0], "html.parser")
