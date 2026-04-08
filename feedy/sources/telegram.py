@@ -29,6 +29,7 @@ class TelegramSource(BaseFeedSource):
             return []
 
     def parse(self, raw: list) -> list[dict]:
+        """Extract title, url and date from each post entry in the index markup."""
         if not raw:
             return []
         soup = BeautifulSoup(raw[0], "html.parser")
