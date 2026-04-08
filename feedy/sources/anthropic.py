@@ -13,6 +13,7 @@ _CARD_SELECTOR = 'a[href^="/news/"]'
 
 
 class AnthropicSource(BaseFeedSource):
+    """Scrapes the Anthropic news index. Requires no credentials."""
     @property
     def name(self) -> str:
         return "anthropic"
