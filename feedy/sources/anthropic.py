@@ -16,6 +16,7 @@ class AnthropicSource(BaseFeedSource):
     """Scrapes the Anthropic news index. Requires no credentials."""
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "anthropic"
 
     def fetch(self) -> list:
