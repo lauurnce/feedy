@@ -88,6 +88,7 @@ def _find_label(content) -> str:
 
 
 def _parse_date(raw: str) -> str:
+    """Coerce the changelog timestamp to an ISO date, or empty string on failure."""
     if not raw:
         return ""
     try:
