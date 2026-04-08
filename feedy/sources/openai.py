@@ -24,6 +24,7 @@ class OpenAISource(BaseFeedSource):
         return "openai"
 
     def fetch(self) -> list:
+        """Fetch the OpenAI news RSS feed, returning an empty list on any transport error."""
         try:
             response = httpx.get(
                 _FEED_URL,
