@@ -39,6 +39,7 @@ def cli():
 
 
 def _build_sources(names):
+    """Instantiate sources by name from the registry, skipping names that are not registered."""
     registry = {
         "telegram": TelegramSource,
         "tiktok": TikTokSource,
