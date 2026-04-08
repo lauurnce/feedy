@@ -19,6 +19,7 @@ class TelegramSource(BaseFeedSource):
         return "telegram"
 
     def fetch(self) -> list:
+        """Fetch the blog index HTML, returning an empty list on any transport error."""
         try:
             response = httpx.get(_BLOG_URL, timeout=10, follow_redirects=True)
             response.raise_for_status()
