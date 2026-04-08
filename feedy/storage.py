@@ -74,6 +74,7 @@ def update_summary(url: str, summary: str) -> bool:
 
 
 def all_entries() -> list[dict]:
+    """Return every stored row as a dict, ordered by created_at descending."""
     conn = _connect()
     try:
         rows = conn.execute("SELECT * FROM entries ORDER BY created_at DESC").fetchall()
