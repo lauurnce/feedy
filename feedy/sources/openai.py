@@ -71,6 +71,7 @@ class OpenAISource(BaseFeedSource):
 
 
 def _parse_date(raw: str | None) -> str:
+    """Coerce the RSS publication date to an ISO date, or empty string on failure."""
     if not raw:
         return ""
     try:
