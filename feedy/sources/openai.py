@@ -39,6 +39,7 @@ class OpenAISource(BaseFeedSource):
             return []
 
     def parse(self, raw: list) -> list[dict]:
+        """Extract title, link and publication date from each RSS item."""
         if not raw:
             return []
         try:
