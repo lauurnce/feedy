@@ -3,6 +3,7 @@ from typing import TypedDict
 
 
 class FeedEntry(TypedDict):
+    """Normalised shape every source must produce; stored and rendered without further mapping."""
     url: str
     title: str
     date: str        # ISO 8601, e.g. "2026-05-16"
