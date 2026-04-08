@@ -13,6 +13,7 @@ _CARD_SELECTOR = 'a[href*="/blog/post/"]'
 
 
 class MetaSource(BaseFeedSource):
+    """Scrapes the Meta for Developers blog index. Requires no credentials."""
     @property
     def name(self) -> str:
         return "meta"
