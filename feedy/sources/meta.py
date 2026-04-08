@@ -20,6 +20,7 @@ class MetaSource(BaseFeedSource):
         return "meta"
 
     def fetch(self) -> list:
+        """Fetch the blog index HTML, returning an empty list on any transport error."""
         try:
             response = httpx.get(
                 _BLOG_URL,
