@@ -15,6 +15,7 @@ _TITLE_SELECTOR = "span.titleline > a"
 
 
 class HackerNewsSource(BaseFeedSource):
+    """Scrapes the Hacker News front page. Requires no credentials."""
     @property
     def name(self) -> str:
         return "hackernews"
