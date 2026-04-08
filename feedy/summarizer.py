@@ -17,6 +17,7 @@ def summarize(entries: list[FeedEntry]) -> list[FeedEntry]:
 
 
 def _build_prompt(entry: FeedEntry) -> str:
+    """Build the three-sentence summarisation prompt for a single entry."""
     return (
         "Summarize this developer blog post.\n\n"
         f"Title: {entry['title']}\n"
