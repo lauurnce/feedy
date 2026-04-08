@@ -12,6 +12,7 @@ class FeedEntry(TypedDict):
 
 
 class BaseFeedSource(ABC):
+    """Abstract adapter. Subclasses implement fetch, parse and to_dict; run() drives the pipeline."""
     @property
     @abstractmethod
     def name(self) -> str:
