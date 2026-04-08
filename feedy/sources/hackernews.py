@@ -22,6 +22,7 @@ class HackerNewsSource(BaseFeedSource):
         return "hackernews"
 
     def fetch(self) -> list:
+        """Fetch the front page HTML, returning an empty list on any transport error."""
         try:
             response = httpx.get(_FEED_URL, timeout=10, follow_redirects=True)
             response.raise_for_status()
