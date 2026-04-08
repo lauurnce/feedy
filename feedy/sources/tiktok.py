@@ -15,6 +15,7 @@ class TikTokSource(BaseFeedSource):
     """Scrapes the TikTok for Developers changelog. Requires no credentials."""
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "tiktok"
 
     def fetch(self) -> list:
