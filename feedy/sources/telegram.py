@@ -15,6 +15,7 @@ class TelegramSource(BaseFeedSource):
     """Scrapes the Telegram blog index. Requires no credentials."""
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "telegram"
 
     def fetch(self) -> list:
