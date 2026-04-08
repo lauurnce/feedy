@@ -16,6 +16,7 @@ class MetaSource(BaseFeedSource):
     """Scrapes the Meta for Developers blog index. Requires no credentials."""
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "meta"
 
     def fetch(self) -> list:
