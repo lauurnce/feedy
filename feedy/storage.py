@@ -49,6 +49,7 @@ def save(entry: dict) -> bool:
 
 
 def save_many(entries: list[dict]) -> tuple[int, int]:
+    """Insert each entry, returning (saved, skipped) where skipped counts url collisions."""
     saved = skipped = 0
     for entry in entries:
         if save(entry):
