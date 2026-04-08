@@ -18,6 +18,7 @@ class HackerNewsSource(BaseFeedSource):
     """Scrapes the Hacker News front page. Requires no credentials."""
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "hackernews"
 
     def fetch(self) -> list:
