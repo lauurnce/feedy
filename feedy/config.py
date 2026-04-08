@@ -23,6 +23,7 @@ class EmailConfig:
 
 @dataclass
 class Config:
+    """Resolved run configuration, defaulting to DEFAULT_SOURCES and markdown output."""
     sources: list[str] = field(default_factory=lambda: list(DEFAULT_SOURCES))
     output_format: str = DEFAULT_OUTPUT_FORMAT
     api_key: str | None = None
