@@ -20,6 +20,7 @@ class AnthropicSource(BaseFeedSource):
         return "anthropic"
 
     def fetch(self) -> list:
+        """Fetch the news index HTML, returning an empty list on any transport error."""
         try:
             response = httpx.get(
                 _BLOG_URL,
