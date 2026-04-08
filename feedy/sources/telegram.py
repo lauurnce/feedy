@@ -12,6 +12,7 @@ _BLOG_URL = f"{_BASE_URL}/blog"
 
 
 class TelegramSource(BaseFeedSource):
+    """Scrapes the Telegram blog index. Requires no credentials."""
     @property
     def name(self) -> str:
         return "telegram"
