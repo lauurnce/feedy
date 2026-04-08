@@ -27,6 +27,7 @@ class XSource(BaseFeedSource):
         return "x"
 
     def fetch(self) -> list:
+        """Fetch the developer docs changelog HTML, returning an empty list on transport error."""
         try:
             response = httpx.get(
                 _BLOG_URL,
