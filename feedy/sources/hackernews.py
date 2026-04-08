@@ -59,6 +59,7 @@ class HackerNewsSource(BaseFeedSource):
         return results
 
     def to_dict(self, entry: dict) -> FeedEntry:
+        """Normalise an intermediate dict onto FeedEntry, leaving summary empty."""
         return FeedEntry(
             url=entry["url"],
             title=entry["title"],
