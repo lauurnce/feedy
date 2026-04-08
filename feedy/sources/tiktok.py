@@ -34,6 +34,7 @@ class TikTokSource(BaseFeedSource):
             return []
 
     def parse(self, raw: list) -> list[dict]:
+        """Extract title, url and date from each changelog entry in the markup."""
         if not raw:
             return []
         soup = BeautifulSoup(raw[0], "html.parser")
