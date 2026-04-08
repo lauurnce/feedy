@@ -12,6 +12,7 @@ _TITLE_SELECTOR = 'span[data-e2e="TUXText"]'
 
 
 class TikTokSource(BaseFeedSource):
+    """Scrapes the TikTok for Developers changelog. Requires no credentials."""
     @property
     def name(self) -> str:
         return "tiktok"
