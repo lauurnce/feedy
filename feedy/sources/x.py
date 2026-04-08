@@ -23,6 +23,7 @@ class XSource(BaseFeedSource):
 
     @property
     def name(self) -> str:
+        """Registry slug for this source."""
         return "x"
 
     def fetch(self) -> list:
