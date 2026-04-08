@@ -70,6 +70,7 @@ class HackerNewsSource(BaseFeedSource):
 
 
 def _parse_date(raw: str) -> str:
+    """Coerce the age tooltip timestamp to an ISO date, or empty string on failure."""
     if not raw:
         return ""
     ts = raw.split()[0]
