@@ -43,4 +43,5 @@ class BaseFeedSource(ABC):
 
     @staticmethod
     def _is_valid(entry: FeedEntry) -> bool:
+        """Return True when the entry carries both a url and a title; partial rows are dropped."""
         return bool(entry.get("url") and entry.get("title"))
