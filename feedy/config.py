@@ -49,6 +49,7 @@ def load_config(path: Path | None = None) -> Config:
 
 
 def _load_email(table: dict | None) -> EmailConfig | None:
+    """Build an EmailConfig from the [email] table, or None when the table is absent."""
     if not table:
         return None
     return EmailConfig(
