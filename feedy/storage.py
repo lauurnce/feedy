@@ -96,6 +96,7 @@ def get_stats() -> dict[str, int]:
 
 
 def get_entries(source: str | None = None, since: str | None = None) -> list[dict]:
+    """Return rows filtered by source and/or minimum date, combined with AND, newest first."""
     conn = _connect()
     try:
         conditions = []
