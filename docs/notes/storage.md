@@ -16,3 +16,4 @@
 - Wrap a batch insert in one transaction so a partial failure leaves no half-written run.
 - The database path comes from config so the CLI and tests can point at different files.
 - Any SQLite client can open the file directly, which makes ad-hoc debugging easy.
+- There is no implicit cleanup. Removing data is always a deliberate, separate action.
