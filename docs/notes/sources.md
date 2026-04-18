@@ -19,3 +19,4 @@
 - Author holds a display name when available, falling back to the upstream handle.
 - Entry bodies may contain HTML. Consumers are responsible for escaping before rendering.
 - Module-level caches make tests order-dependent. Keep any caching inside the instance.
+- A source test should cover: happy path, empty response, and one malformed payload.
