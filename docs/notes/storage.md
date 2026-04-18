@@ -4,3 +4,4 @@
 - Re-inserting a known entry id is a no-op, which makes re-running a fetch safe.
 - SQLite keeps the whole database in one file, which suits a single-user local tool.
 - Entries are never edited in place. Corrections arrive as new rows, preserving history.
+- Open a connection per operation. Long-lived connections complicate testing and cleanup.
