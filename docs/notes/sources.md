@@ -11,3 +11,4 @@
 - Respect upstream rate limits inside the source. Callers should not need to know the specifics.
 - The registry maps a name to a source class so the CLI can resolve sources without imports.
 - Adding a source: implement the base class, register the name, add a test module beside it.
+- Sources never print. Anything user-facing goes through the CLI so output stays testable.
