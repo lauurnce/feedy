@@ -23,3 +23,4 @@
 - Tests stub the transport layer rather than hitting the network, keeping the suite offline.
 - Source config keys are namespaced by source name to avoid collisions in one flat config.
 - Credentials come from config or environment. Nothing secret is ever hardcoded in a source.
+- A source fetches one page by default. Deep backfill is an explicit, opt-in operation.
