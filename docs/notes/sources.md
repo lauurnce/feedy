@@ -12,3 +12,4 @@
 - The registry maps a name to a source class so the CLI can resolve sources without imports.
 - Adding a source: implement the base class, register the name, add a test module beside it.
 - Sources never print. Anything user-facing goes through the CLI so output stays testable.
+- Optional fields default to None rather than empty string, so "absent" and "blank" stay distinct.
