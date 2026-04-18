@@ -15,3 +15,4 @@
 - Optional fields default to None rather than empty string, so "absent" and "blank" stay distinct.
 - Prefer the canonical permalink over a tracking or share URL when both are available.
 - Items that vanish upstream stay in storage. History is append-only by design.
+- Fetch order is not guaranteed. Sort explicitly wherever order matters.
