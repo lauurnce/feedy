@@ -17,3 +17,4 @@
 - Items that vanish upstream stay in storage. History is append-only by design.
 - Fetch order is not guaranteed. Sort explicitly wherever order matters.
 - Author holds a display name when available, falling back to the upstream handle.
+- Entry bodies may contain HTML. Consumers are responsible for escaping before rendering.
