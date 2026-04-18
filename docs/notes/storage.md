@@ -12,3 +12,4 @@
 - Stats aggregate counts per source, giving a quick sense of which feeds are productive.
 - Callers should page or limit. Storage does not guard against unbounded reads on its own.
 - Filtering rules belong to the caller. Storage answers queries, it does not decide policy.
+- A fresh database is valid. Every read path returns an empty result rather than failing.
