@@ -7,3 +7,4 @@
 - Timestamps are stored as UTC. Convert at the source boundary, never further downstream.
 - An empty fetch is a valid result, not an error. Return an empty list rather than raising.
 - Let transport errors propagate. The caller decides whether one bad source aborts the run.
+- Sources pass through full text. Truncation is a presentation concern handled at digest time.
