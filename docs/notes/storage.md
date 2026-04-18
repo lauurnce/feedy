@@ -7,3 +7,4 @@
 - Open a connection per operation. Long-lived connections complicate testing and cleanup.
 - Index the columns used for filtering, chiefly source and published timestamp.
 - Tests use a temporary database path so no run touches the developer's real data.
+- Schema changes ship as forward-only migrations. There is no automatic downgrade path.
