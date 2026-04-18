@@ -10,3 +10,4 @@
 - Schema changes ship as forward-only migrations. There is no automatic downgrade path.
 - UTC text sorts correctly in SQLite and avoids timezone drift between platforms.
 - Stats aggregate counts per source, giving a quick sense of which feeds are productive.
+- Callers should page or limit. Storage does not guard against unbounded reads on its own.
