@@ -13,3 +13,4 @@
 - Adding a source: implement the base class, register the name, add a test module beside it.
 - Sources never print. Anything user-facing goes through the CLI so output stays testable.
 - Optional fields default to None rather than empty string, so "absent" and "blank" stay distinct.
+- Prefer the canonical permalink over a tracking or share URL when both are available.
