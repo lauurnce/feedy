@@ -27,3 +27,4 @@
 - Deduplicate within a single fetch before returning; upstream feeds sometimes repeat items.
 - When an item has no title, derive a short one from the body rather than leaving it blank.
 - Long titles are kept intact in storage and shortened only when rendered.
+- Error messages include the source name so a failing run points at the right module.
