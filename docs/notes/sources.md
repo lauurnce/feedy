@@ -8,3 +8,4 @@
 - An empty fetch is a valid result, not an error. Return an empty list rather than raising.
 - Let transport errors propagate. The caller decides whether one bad source aborts the run.
 - Sources pass through full text. Truncation is a presentation concern handled at digest time.
+- Respect upstream rate limits inside the source. Callers should not need to know the specifics.
