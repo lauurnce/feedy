@@ -11,3 +11,4 @@
 - UTC text sorts correctly in SQLite and avoids timezone drift between platforms.
 - Stats aggregate counts per source, giving a quick sense of which feeds are productive.
 - Callers should page or limit. Storage does not guard against unbounded reads on its own.
+- Filtering rules belong to the caller. Storage answers queries, it does not decide policy.
