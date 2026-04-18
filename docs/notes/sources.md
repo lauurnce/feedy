@@ -26,3 +26,4 @@
 - A source fetches one page by default. Deep backfill is an explicit, opt-in operation.
 - Deduplicate within a single fetch before returning; upstream feeds sometimes repeat items.
 - When an item has no title, derive a short one from the body rather than leaving it blank.
+- Long titles are kept intact in storage and shortened only when rendered.
