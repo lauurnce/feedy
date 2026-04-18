@@ -5,3 +5,4 @@
 - SQLite keeps the whole database in one file, which suits a single-user local tool.
 - Entries are never edited in place. Corrections arrive as new rows, preserving history.
 - Open a connection per operation. Long-lived connections complicate testing and cleanup.
+- Index the columns used for filtering, chiefly source and published timestamp.
