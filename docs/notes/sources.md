@@ -20,3 +20,4 @@
 - Entry bodies may contain HTML. Consumers are responsible for escaping before rendering.
 - Module-level caches make tests order-dependent. Keep any caching inside the instance.
 - A source test should cover: happy path, empty response, and one malformed payload.
+- Tests stub the transport layer rather than hitting the network, keeping the suite offline.
