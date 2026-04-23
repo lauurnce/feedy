@@ -9,3 +9,4 @@
 - Successful runs print results only. Progress chatter belongs behind a verbose flag.
 - Validate arguments before doing any work so bad input fails fast and cheaply.
 - Boolean flags default to off. Turning a feature on is always the explicit choice.
+- User-facing errors are one readable line. Tracebacks stay behind a debug flag.
