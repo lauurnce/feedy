@@ -19,3 +19,4 @@
 - Option names mirror config keys so switching between the two requires no translation.
 - Explicit flags beat config values, and config beats built-in defaults.
 - Avoiding module-level state means tests can run commands repeatedly in one process.
+- Counts in output are labelled with the unit, so "12 entries" rather than a bare number.
