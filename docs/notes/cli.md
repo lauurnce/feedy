@@ -7,3 +7,4 @@
 - `--limit` caps rows for readability; omitting it returns everything the query matched.
 - `sources` lists registered source names, which is the quickest check that a source loaded.
 - Successful runs print results only. Progress chatter belongs behind a verbose flag.
+- Validate arguments before doing any work so bad input fails fast and cheaply.
