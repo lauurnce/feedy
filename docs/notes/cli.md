@@ -12,3 +12,4 @@
 - User-facing errors are one readable line. Tracebacks stay behind a debug flag.
 - Command tests invoke the CLI entry point directly and assert on captured output.
 - No interactive prompts: the CLI must run unattended in scheduled jobs.
+- Every command carries a one-line description that reads well in the top-level help.
