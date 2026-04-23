@@ -11,3 +11,4 @@
 - Boolean flags default to off. Turning a feature on is always the explicit choice.
 - User-facing errors are one readable line. Tracebacks stay behind a debug flag.
 - Command tests invoke the CLI entry point directly and assert on captured output.
+- No interactive prompts: the CLI must run unattended in scheduled jobs.
