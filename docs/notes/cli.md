@@ -4,3 +4,4 @@
 - Commands are short verbs or plain nouns: `fetch`, `list`, `stats`, `sources`, `digest`.
 - Routing output through one place keeps formatting consistent and easy to snapshot in tests.
 - Exit non-zero on failure so the CLI composes properly inside shell scripts and CI.
+- `--limit` caps rows for readability; omitting it returns everything the query matched.
