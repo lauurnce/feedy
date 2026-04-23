@@ -17,3 +17,4 @@
 - `fetch` pulls every registered source unless a specific source is named.
 - `digest --format` picks the renderer, so adding a format does not change the command.
 - Option names mirror config keys so switching between the two requires no translation.
+- Explicit flags beat config values, and config beats built-in defaults.
