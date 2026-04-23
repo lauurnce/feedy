@@ -15,3 +15,4 @@
 - Every command carries a one-line description that reads well in the top-level help.
 - Colour is optional decoration. Output must stay readable when piped to a file.
 - `fetch` pulls every registered source unless a specific source is named.
+- `digest --format` picks the renderer, so adding a format does not change the command.
