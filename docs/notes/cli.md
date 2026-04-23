@@ -6,3 +6,4 @@
 - Exit non-zero on failure so the CLI composes properly inside shell scripts and CI.
 - `--limit` caps rows for readability; omitting it returns everything the query matched.
 - `sources` lists registered source names, which is the quickest check that a source loaded.
+- Successful runs print results only. Progress chatter belongs behind a verbose flag.
