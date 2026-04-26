@@ -12,3 +12,4 @@
 - Entries are stored first, so a summarisation outage never costs a fetch.
 - Batching cuts overhead but complicates error attribution; single-entry calls stay the default.
 - Summariser tests stub the provider, so the suite never depends on live model output.
+- Oversized inputs are trimmed before sending, and the trim point is logged.
