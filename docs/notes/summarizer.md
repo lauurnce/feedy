@@ -13,3 +13,4 @@
 - Batching cuts overhead but complicates error attribution; single-entry calls stay the default.
 - Summariser tests stub the provider, so the suite never depends on live model output.
 - Oversized inputs are trimmed before sending, and the trim point is logged.
+- Generated summaries are labelled as such so they are never mistaken for upstream text.
