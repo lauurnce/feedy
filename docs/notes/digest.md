@@ -9,3 +9,4 @@
 - Selecting entries and rendering them are separate steps, so formats share one selection.
 - Plain text is the baseline format and must stay readable in a terminal without wrapping.
 - HTML output escapes entry content, since upstream bodies are untrusted markup.
+- Bodies are trimmed at a sentence boundary where possible, never mid-word.
