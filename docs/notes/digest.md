@@ -4,3 +4,4 @@
 - Building a digest is a read-only operation and can be repeated without side effects.
 - The default window covers the most recent run. Wider windows are requested explicitly.
 - Grouping by source keeps related items together and makes a long digest scannable.
+- Within a group, entries run newest first so the freshest item is read first.
