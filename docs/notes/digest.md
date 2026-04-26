@@ -11,3 +11,4 @@
 - HTML output escapes entry content, since upstream bodies are untrusted markup.
 - Bodies are trimmed at a sentence boundary where possible, never mid-word.
 - Every entry links back to its canonical URL so the digest stays a jumping-off point.
+- Digests stay text-only, which keeps them small and readable in any mail client.
