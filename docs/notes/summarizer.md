@@ -7,3 +7,4 @@
 - Summaries target a couple of sentences; longer output defeats the point of a digest.
 - Prompt text lives in one place so it can be tuned without touching orchestration logic.
 - Entries already shorter than the target length are passed through untouched.
+- The summariser interface is provider-agnostic; swapping the backend changes one module.
