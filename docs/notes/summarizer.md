@@ -9,3 +9,4 @@
 - Entries already shorter than the target length are passed through untouched.
 - The summariser interface is provider-agnostic; swapping the backend changes one module.
 - Summaries stay in the source language unless translation is explicitly requested.
+- Entries are stored first, so a summarisation outage never costs a fetch.
