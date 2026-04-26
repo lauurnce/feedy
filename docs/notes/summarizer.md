@@ -5,3 +5,4 @@
 - If summarisation fails the original text is used, so a bad response never loses content.
 - Summaries are stored alongside the entry so the same text is never paid for twice.
 - Summaries target a couple of sentences; longer output defeats the point of a digest.
+- Prompt text lives in one place so it can be tuned without touching orchestration logic.
