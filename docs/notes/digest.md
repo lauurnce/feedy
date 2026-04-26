@@ -13,3 +13,4 @@
 - Every entry links back to its canonical URL so the digest stays a jumping-off point.
 - Digests stay text-only, which keeps them small and readable in any mail client.
 - Headings carry the source name and item count, giving a summary before the detail.
+- Given the same entries, a digest renders identically, which makes it snapshot-testable.
