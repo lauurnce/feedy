@@ -10,3 +10,4 @@
 - Plain text is the baseline format and must stay readable in a terminal without wrapping.
 - HTML output escapes entry content, since upstream bodies are untrusted markup.
 - Bodies are trimmed at a sentence boundary where possible, never mid-word.
+- Every entry links back to its canonical URL so the digest stays a jumping-off point.
