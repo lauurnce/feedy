@@ -15,3 +15,4 @@
 - Headings carry the source name and item count, giving a summary before the detail.
 - Given the same entries, a digest renders identically, which makes it snapshot-testable.
 - The same story from two sources appears twice. Cross-source dedup is deliberately out of scope.
+- A new format implements the renderer contract and registers a name; nothing else changes.
