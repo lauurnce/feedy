@@ -7,3 +7,4 @@
 - Within a group, entries run newest first so the freshest item is read first.
 - An empty digest still renders, with a short line saying nothing new arrived.
 - Selecting entries and rendering them are separate steps, so formats share one selection.
+- Plain text is the baseline format and must stay readable in a terminal without wrapping.
