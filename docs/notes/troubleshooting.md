@@ -8,3 +8,4 @@
 - For a failed scheduled run, reproduce locally with the same config before changing code.
 - Print the resolved config first; most "ignored setting" reports are precedence surprises.
 - An order-dependent test almost always points at shared state left over between runs.
+- If timestamps look shifted, check where local time entered the pipeline instead of UTC.
