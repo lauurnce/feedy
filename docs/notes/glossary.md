@@ -7,3 +7,4 @@
 - **Registry** — the name-to-class mapping that lets the CLI resolve sources at runtime.
 - **Upstream id** — the stable identifier assigned by the source service, used for dedup.
 - **Summary** — generated short text derived from an entry, always stored separately from it.
+- **Window** — the time range a digest covers, defaulting to the most recent fetch.
