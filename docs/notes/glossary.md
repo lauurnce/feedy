@@ -11,3 +11,4 @@
 - **Renderer** — the component that turns selected entries into one output format.
 - **Notifier** — a delivery channel that sends a rendered digest somewhere.
 - **Run** — one complete invocation, typically fetch then optionally summarise and digest.
+- **Precedence** — the order flags, config and defaults resolve in, highest first.
