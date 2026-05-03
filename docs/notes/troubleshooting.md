@@ -3,3 +3,4 @@
 - Empty fetch: check the source is registered, then check credentials, then check the upstream.
 - Run `sources` first. If a source is missing there, the problem is registration, not network.
 - If an entry seems missing, confirm it was fetched before assuming storage dropped it.
+- Pointing at an old database path is a common cause of "my entries disappeared".
