@@ -13,3 +13,4 @@
 - A malformed payload should fail loudly for that source only, not abort the whole run.
 - An empty digest with populated storage usually means the window, not the data, is wrong.
 - Open the database and inspect the schema directly before suspecting a migration bug.
+- A slow run is usually one slow upstream; time each source before optimising anything.
