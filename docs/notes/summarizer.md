@@ -15,3 +15,4 @@
 - Oversized inputs are trimmed before sending, and the trim point is logged.
 - Generated summaries are labelled as such so they are never mistaken for upstream text.
 - One retry on a transient error, then give up and fall back to the original text.
+- Skip entries that already have a summary; the cheapest call is the one not made.
