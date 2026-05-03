@@ -14,3 +14,4 @@
 - **Precedence** — the order flags, config and defaults resolve in, highest first.
 - **Backfill** — an explicit deep fetch of older items, never part of a routine run.
 - **Normalisation** — mapping an upstream payload onto the shared entry schema.
+- **Idempotent write** — a write that can repeat safely because it keys on upstream id.
