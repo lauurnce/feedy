@@ -13,3 +13,4 @@
 - **Run** — one complete invocation, typically fetch then optionally summarise and digest.
 - **Precedence** — the order flags, config and defaults resolve in, highest first.
 - **Backfill** — an explicit deep fetch of older items, never part of a routine run.
+- **Normalisation** — mapping an upstream payload onto the shared entry schema.
