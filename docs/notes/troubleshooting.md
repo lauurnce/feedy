@@ -15,3 +15,4 @@
 - Open the database and inspect the schema directly before suspecting a migration bug.
 - A slow run is usually one slow upstream; time each source before optimising anything.
 - Truncated output is far more often a `--limit` than a storage problem.
+- Reproduce from stored entries where possible; it removes the network from the equation.
