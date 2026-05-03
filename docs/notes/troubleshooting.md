@@ -10,3 +10,4 @@
 - An order-dependent test almost always points at shared state left over between runs.
 - If timestamps look shifted, check where local time entered the pipeline instead of UTC.
 - Fetch one source at a time to isolate which upstream is actually failing.
+- A malformed payload should fail loudly for that source only, not abort the whole run.
