@@ -16,3 +16,4 @@
 - A slow run is usually one slow upstream; time each source before optimising anything.
 - Truncated output is far more often a `--limit` than a storage problem.
 - Reproduce from stored entries where possible; it removes the network from the equation.
+- Narrow the failure to one module before editing anything; guesses cost more than bisection.
