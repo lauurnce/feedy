@@ -6,3 +6,4 @@
 - Pointing at an old database path is a common cause of "my entries disappeared".
 - Duplicates usually mean the upstream id changed, not that dedup is broken.
 - For a failed scheduled run, reproduce locally with the same config before changing code.
+- Print the resolved config first; most "ignored setting" reports are precedence surprises.
