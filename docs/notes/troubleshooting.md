@@ -17,3 +17,4 @@
 - Truncated output is far more often a `--limit` than a storage problem.
 - Reproduce from stored entries where possible; it removes the network from the equation.
 - Narrow the failure to one module before editing anything; guesses cost more than bisection.
+- Authentication failures look like empty results in some upstreams. Check status codes.
