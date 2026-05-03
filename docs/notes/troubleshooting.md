@@ -4,3 +4,4 @@
 - Run `sources` first. If a source is missing there, the problem is registration, not network.
 - If an entry seems missing, confirm it was fetched before assuming storage dropped it.
 - Pointing at an old database path is a common cause of "my entries disappeared".
+- Duplicates usually mean the upstream id changed, not that dedup is broken.
