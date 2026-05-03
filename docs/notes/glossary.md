@@ -8,3 +8,4 @@
 - **Upstream id** — the stable identifier assigned by the source service, used for dedup.
 - **Summary** — generated short text derived from an entry, always stored separately from it.
 - **Window** — the time range a digest covers, defaulting to the most recent fetch.
+- **Renderer** — the component that turns selected entries into one output format.
