@@ -11,3 +11,4 @@
 - Config is read once at startup; re-reading mid-run would make behaviour hard to reason about.
 - A missing config file is fine. Every setting has a default that produces a sane run.
 - Relative paths resolve against the working directory, which keeps test setups simple.
+- Values are coerced to their expected type on load, so downstream code never parses strings.
