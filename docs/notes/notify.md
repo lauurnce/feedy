@@ -11,3 +11,4 @@
 - Each channel picks the format it renders best; plain text is the safe default.
 - Delivery runs last so a channel outage cannot cost a fetch or a summarisation.
 - Notifier tests assert on the payload handed to the transport, never on live delivery.
+- Failure messages name the channel, so a multi-channel run points at the right one.
