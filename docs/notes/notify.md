@@ -9,3 +9,4 @@
 - Tokens come from config or environment, and are never logged, even at debug level.
 - Retry once on a transient network error, then report the failure and move on.
 - Each channel picks the format it renders best; plain text is the safe default.
+- Delivery runs last so a channel outage cannot cost a fetch or a summarisation.
