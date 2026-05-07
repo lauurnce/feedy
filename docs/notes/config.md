@@ -10,3 +10,4 @@
 - Printing the resolved config is the fastest way to settle a precedence question.
 - Config is read once at startup; re-reading mid-run would make behaviour hard to reason about.
 - A missing config file is fine. Every setting has a default that produces a sane run.
+- Relative paths resolve against the working directory, which keeps test setups simple.
