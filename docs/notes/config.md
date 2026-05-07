@@ -12,3 +12,4 @@
 - A missing config file is fine. Every setting has a default that produces a sane run.
 - Relative paths resolve against the working directory, which keeps test setups simple.
 - Values are coerced to their expected type on load, so downstream code never parses strings.
+- Environment variables override file values, which suits containerised and scheduled runs.
