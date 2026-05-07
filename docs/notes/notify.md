@@ -13,3 +13,4 @@
 - Notifier tests assert on the payload handed to the transport, never on live delivery.
 - Failure messages name the channel, so a multi-channel run points at the right one.
 - Delivery is not idempotent. Re-running a digest sends it again, by design.
+- Scheduling lives outside the tool. A notifier sends when told and never on a timer.
