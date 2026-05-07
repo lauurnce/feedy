@@ -5,3 +5,4 @@
 - Defaults live in code so a missing config file still yields a working run.
 - Secrets are referenced from the environment rather than written into the config file.
 - Config is validated at startup, so a typo fails immediately instead of mid-run.
+- An unknown key is a warning, not an error, so old configs keep working after upgrades.
