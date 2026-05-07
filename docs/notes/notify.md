@@ -8,3 +8,4 @@
 - Channels differ in size limits. Split or trim at the notifier, not upstream in the digest.
 - Tokens come from config or environment, and are never logged, even at debug level.
 - Retry once on a transient network error, then report the failure and move on.
+- Each channel picks the format it renders best; plain text is the safe default.
