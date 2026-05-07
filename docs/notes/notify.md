@@ -5,3 +5,4 @@
 - With several channels configured, one failing channel must not block the others.
 - Channels are chosen from config so enabling one requires no code change.
 - No configured channel is a valid setup; the run completes and simply delivers nothing.
+- Channels differ in size limits. Split or trim at the notifier, not upstream in the digest.
