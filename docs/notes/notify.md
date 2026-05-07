@@ -6,3 +6,4 @@
 - Channels are chosen from config so enabling one requires no code change.
 - No configured channel is a valid setup; the run completes and simply delivers nothing.
 - Channels differ in size limits. Split or trim at the notifier, not upstream in the digest.
+- Tokens come from config or environment, and are never logged, even at debug level.
