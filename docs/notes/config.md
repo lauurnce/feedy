@@ -14,3 +14,4 @@
 - Values are coerced to their expected type on load, so downstream code never parses strings.
 - Environment variables override file values, which suits containerised and scheduled runs.
 - Every new setting gets a default and a one-line description in the same commit.
+- Booleans default to false, so new behaviour is always opt-in for existing users.
