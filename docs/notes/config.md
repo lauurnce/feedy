@@ -8,3 +8,4 @@
 - An unknown key is a warning, not an error, so old configs keep working after upgrades.
 - Source settings are namespaced by source name, keeping one flat file collision-free.
 - Printing the resolved config is the fastest way to settle a precedence question.
+- Config is read once at startup; re-reading mid-run would make behaviour hard to reason about.
