@@ -13,3 +13,4 @@
 - Relative paths resolve against the working directory, which keeps test setups simple.
 - Values are coerced to their expected type on load, so downstream code never parses strings.
 - Environment variables override file values, which suits containerised and scheduled runs.
+- Every new setting gets a default and a one-line description in the same commit.
