@@ -5,3 +5,4 @@
 - Endpoints returning collections take a limit, so no response is unbounded by accident.
 - JSON is the single response format; rendering belongs to whatever consumes the API.
 - Errors return a proper status code and a short message, never a stack trace.
+- Unknown routes return 404 with a JSON body, keeping the content type consistent.
