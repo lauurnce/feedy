@@ -6,3 +6,4 @@
 - JSON is the single response format; rendering belongs to whatever consumes the API.
 - Errors return a proper status code and a short message, never a stack trace.
 - Unknown routes return 404 with a JSON body, keeping the content type consistent.
+- The API uses the same storage functions as the CLI, so behaviour cannot drift apart.
