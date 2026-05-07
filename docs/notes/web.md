@@ -2,3 +2,4 @@
 
 - The web layer exposes stored entries read-only. It never triggers fetches on its own.
 - API filters mirror CLI options, so the two interfaces stay conceptually identical.
+- Endpoints returning collections take a limit, so no response is unbounded by accident.
