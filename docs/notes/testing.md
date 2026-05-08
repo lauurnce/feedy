@@ -13,3 +13,4 @@
 - Error paths deserve tests too; assert on the failure, not just the success case.
 - A fast suite gets run often. Anything slow belongs behind an explicit marker.
 - Stub at the boundary, not inside the module under test, or the test asserts on itself.
+- Prefer small explicit setup in the test over a fixture that hides what is being tested.
