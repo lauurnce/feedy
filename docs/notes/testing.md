@@ -9,3 +9,4 @@
 - Test behaviour through the public interface; private helpers change too often to pin down.
 - A new source ships with tests for the happy path, an empty response and a malformed payload.
 - Digest rendering is deterministic, which makes snapshot comparison a good fit.
+- Test names describe the behaviour asserted, so a failure reads as a sentence.
