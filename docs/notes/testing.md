@@ -6,3 +6,4 @@
 - Every test gets a fresh temporary database, so no test can observe another's writes.
 - Tests must pass in any order. Order dependence signals leaked state, not a flaky test.
 - A failing assertion should say what was expected and what happened, without needing a debugger.
+- Test behaviour through the public interface; private helpers change too often to pin down.
