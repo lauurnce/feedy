@@ -14,3 +14,4 @@
 - A fast suite gets run often. Anything slow belongs behind an explicit marker.
 - Stub at the boundary, not inside the module under test, or the test asserts on itself.
 - Prefer small explicit setup in the test over a fixture that hides what is being tested.
+- Every escaped bug gets a regression test before the fix lands, not after.
