@@ -8,3 +8,4 @@
 - Unknown routes return 404 with a JSON body, keeping the content type consistent.
 - The API uses the same storage functions as the CLI, so behaviour cannot drift apart.
 - The API assumes a trusted local network; exposing it publicly needs a proxy in front.
+- Response fields match the entry schema names, avoiding a second vocabulary to learn.
