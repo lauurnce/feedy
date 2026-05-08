@@ -14,3 +14,4 @@
 - The web layer is optional; the CLI remains fully usable without ever starting a server.
 - An empty collection returns 200 with an empty list, not 404.
 - There are no write endpoints. Ingestion happens through fetch, keeping one path in.
+- Filter parameters are optional and combine with AND, which matches the CLI's behaviour.
