@@ -10,3 +10,4 @@
 - The API assumes a trusted local network; exposing it publicly needs a proxy in front.
 - Response fields match the entry schema names, avoiding a second vocabulary to learn.
 - Timestamps serialise as ISO 8601 UTC, matching how they are stored.
+- Endpoint tests run against a temporary database through the framework's test client.
