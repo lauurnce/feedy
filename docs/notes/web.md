@@ -9,3 +9,4 @@
 - The API uses the same storage functions as the CLI, so behaviour cannot drift apart.
 - The API assumes a trusted local network; exposing it publicly needs a proxy in front.
 - Response fields match the entry schema names, avoiding a second vocabulary to learn.
+- Timestamps serialise as ISO 8601 UTC, matching how they are stored.
