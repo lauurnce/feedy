@@ -11,3 +11,4 @@
 - Response fields match the entry schema names, avoiding a second vocabulary to learn.
 - Timestamps serialise as ISO 8601 UTC, matching how they are stored.
 - Endpoint tests run against a temporary database through the framework's test client.
+- The web layer is optional; the CLI remains fully usable without ever starting a server.
