@@ -11,3 +11,4 @@
 - Digest rendering is deterministic, which makes snapshot comparison a good fit.
 - Test names describe the behaviour asserted, so a failure reads as a sentence.
 - Error paths deserve tests too; assert on the failure, not just the success case.
+- A fast suite gets run often. Anything slow belongs behind an explicit marker.
