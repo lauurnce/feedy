@@ -20,4 +20,4 @@ feedy digest      # generate today's AI summary
 
 ## Status
 
-Work in progress. See [ROADMAP.md](ROADMAP.md) for progress.
+Work in progress.
