@@ -71,7 +71,8 @@ def test_update_summary_persists_new_summary():
     storage.save({"url": "https://j.com", "title": "J", "date": "2026-05-17", "source": "x", "summary": ""})
     storage.update_summary("https://j.com", "Updated summary.")
     entries = storage.all_entries()
-    assert entries[0]["summary"] == "Updated summary."
+    match = next(e for e in entries if e["url"] == "https://j.com")
+    assert match["summary"] == "Updated summary."
 
 
 def test_update_summary_returns_false_when_url_missing():
