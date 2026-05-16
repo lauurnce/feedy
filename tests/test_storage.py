@@ -59,3 +59,21 @@ def test_save_many_empty_list_returns_zero_zero():
     saved, skipped = storage.save_many([])
     assert saved == 0
     assert skipped == 0
+
+
+def test_update_summary_returns_true_when_url_exists():
+    storage.save({"url": "https://i.com", "title": "I", "date": "2026-05-17", "source": "x", "summary": ""})
+    result = storage.update_summary("https://i.com", "AI wrote this.")
+    assert result is True
+
+
+def test_update_summary_persists_new_summary():
+    storage.save({"url": "https://j.com", "title": "J", "date": "2026-05-17", "source": "x", "summary": ""})
+    storage.update_summary("https://j.com", "Updated summary.")
+    entries = storage.all_entries()
+    assert entries[0]["summary"] == "Updated summary."
+
+
+def test_update_summary_returns_false_when_url_missing():
+    result = storage.update_summary("https://notexist.com", "ghost")
+    assert result is False

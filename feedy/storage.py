@@ -57,6 +57,20 @@ def save_many(entries: list[dict]) -> tuple[int, int]:
     return saved, skipped
 
 
+def update_summary(url: str, summary: str) -> bool:
+    """Update summary for an entry by URL. Return True if URL exists, False otherwise."""
+    conn = _connect()
+    try:
+        with conn:
+            cursor = conn.execute(
+                "UPDATE entries SET summary = ? WHERE url = ?",
+                (summary, url),
+            )
+        return cursor.rowcount > 0
+    finally:
+        conn.close()
+
+
 def all_entries() -> list[dict]:
     conn = _connect()
     try:
