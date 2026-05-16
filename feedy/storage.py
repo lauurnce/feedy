@@ -27,13 +27,15 @@ def _connect() -> sqlite3.Connection:
 
 def init_db() -> None:
     """Kept for backward compatibility. Init is now lazy inside _connect()."""
-    _connect().close()
+    conn = _connect()
+    conn.close()
 
 
 def save(entry: dict) -> bool:
     """Insert entry; return False if URL already exists (dedup)."""
+    conn = _connect()
     try:
-        with _connect() as conn:
+        with conn:
             conn.execute(
                 "INSERT INTO entries (url, title, date, source, summary) VALUES (?, ?, ?, ?, ?)",
                 (entry["url"], entry.get("title"), entry.get("date"), entry.get("source"), entry.get("summary")),
@@ -41,9 +43,24 @@ def save(entry: dict) -> bool:
         return True
     except sqlite3.IntegrityError:
         return False
+    finally:
+        conn.close()
+
+
+def save_many(entries: list[dict]) -> tuple[int, int]:
+    saved = skipped = 0
+    for entry in entries:
+        if save(entry):
+            saved += 1
+        else:
+            skipped += 1
+    return saved, skipped
 
 
 def all_entries() -> list[dict]:
-    with _connect() as conn:
+    conn = _connect()
+    try:
         rows = conn.execute("SELECT * FROM entries ORDER BY created_at DESC").fetchall()
-    return [dict(r) for r in rows]
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
