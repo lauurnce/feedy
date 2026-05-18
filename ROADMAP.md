@@ -2,7 +2,7 @@
 - [x] Day 01 — Scaffold project: pyproject.toml, folder structure, .gitignore, README stub
 - [x] Day 02 — BaseFeedSource abstract class with fetch(), parse(), to_dict()
 - [x] Day 03 — SQLite storage module with save and dedup by URL
-- [ ] Day 04 — TelegramSource: scrape core.telegram.org/blog, parse titles + links + dates
+- [x] Day 04 — TelegramSource: scrape core.telegram.org/blog, parse titles + links + dates
 - [ ] Day 05 — pytest setup + tests for TelegramSource and SQLite storage
 
 ## Week 2 — More Sources

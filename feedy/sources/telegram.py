@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 from feedy.sources.base import BaseFeedSource, FeedEntry
 
-_BASE_URL = "https://core.telegram.org"
+_BASE_URL = "https://telegram.org"
 _BLOG_URL = f"{_BASE_URL}/blog"
 
 
