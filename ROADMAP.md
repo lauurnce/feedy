@@ -3,7 +3,7 @@
 - [x] Day 02 — BaseFeedSource abstract class with fetch(), parse(), to_dict()
 - [x] Day 03 — SQLite storage module with save and dedup by URL
 - [x] Day 04 — TelegramSource: scrape core.telegram.org/blog, parse titles + links + dates
-- [ ] Day 05 — pytest setup + tests for TelegramSource and SQLite storage
+- [x] Day 05 — pytest setup + tests for TelegramSource and SQLite storage
 
 ## Week 2 — More Sources
 - [ ] Day 06 — XSource: scrape Twitter/X developer blog (developer.twitter.com)
