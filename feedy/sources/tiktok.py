@@ -31,7 +31,24 @@ class TikTokSource(BaseFeedSource):
             return []
 
     def parse(self, raw: list) -> list[dict]:
-        raise NotImplementedError
+        if not raw:
+            return []
+        soup = BeautifulSoup(raw[0], "html.parser")
+        cards = soup.select(_CARD_SELECTOR)
+        results = []
+        for card in cards:
+            href = card.get("href", "")
+            if href.startswith("/"):
+                href = f"{_BASE_URL}{href}"
+            title_el = card.select_one(_TITLE_SELECTOR)
+            if not title_el:
+                continue
+            results.append({
+                "title": title_el.get_text(strip=True),
+                "url": href,
+                "date": "",
+            })
+        return results
 
     def to_dict(self, entry: dict) -> FeedEntry:
         raise NotImplementedError
