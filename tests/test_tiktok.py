@@ -47,3 +47,34 @@ def test_parse_expands_relative_url(source):
 def test_parse_sets_empty_date(source):
     result = source.parse([_TWO_CARDS_HTML])
     assert result[0]["date"] == ""
+
+
+_NO_TITLE_CARD_HTML = textwrap.dedent("""\
+    <html><body>
+    <a data-e2e="CardContainer" href="/blog/no-title">
+    </a>
+    </body></html>
+""")
+
+_ABSOLUTE_URL_HTML = textwrap.dedent("""\
+    <html><body>
+    <a data-e2e="CardContainer" href="https://developers.tiktok.com/blog/absolute">
+        <span data-e2e="TUXText">Absolute URL Post</span>
+    </a>
+    </body></html>
+""")
+
+
+def test_parse_skips_card_with_no_title(source):
+    result = source.parse([_NO_TITLE_CARD_HTML])
+    assert result == []
+
+
+def test_parse_returns_empty_for_empty_input(source):
+    result = source.parse([])
+    assert result == []
+
+
+def test_parse_preserves_absolute_url_unchanged(source):
+    result = source.parse([_ABSOLUTE_URL_HTML])
+    assert result[0]["url"] == "https://developers.tiktok.com/blog/absolute"
