@@ -7,7 +7,7 @@
 
 ## Week 2 — More Sources
 - [ ] Day 06 — XSource: scrape Twitter/X developer blog (developer.twitter.com)
-- [ ] Day 07 — TikTokSource: scrape developers.tiktok.com/blog
+- [x] Day 07 — TikTokSource: scrape developers.tiktok.com/blog
 - [ ] Day 08 — MetaSource: scrape developers.facebook.com/blog
 - [ ] Day 09 — CLI entry point: `feedwise fetch` command using Click
 - [ ] Day 10 — CLI: `feedwise list` — show saved entries from DB in terminal
