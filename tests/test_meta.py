@@ -94,3 +94,28 @@ def test_parse_preserves_absolute_url(source):
 def test_parse_empty_date_on_missing_h6(source):
     result = source.parse([_NO_DATE_CARD_HTML])
     assert result[0]["date"] == ""
+
+
+def test_to_dict_sets_source_to_meta(source):
+    entry = {"url": "https://developers.facebook.com/blog/post/x/", "title": "X", "date": "2026-04-14"}
+    result = source.to_dict(entry)
+    assert result["source"] == "meta"
+
+
+def test_to_dict_sets_empty_summary(source):
+    entry = {"url": "https://developers.facebook.com/blog/post/x/", "title": "X", "date": "2026-04-14"}
+    result = source.to_dict(entry)
+    assert result["summary"] == ""
+
+
+def test_to_dict_preserves_url_and_title(source):
+    entry = {"url": "https://developers.facebook.com/blog/post/x/", "title": "Post Title", "date": "2026-04-14"}
+    result = source.to_dict(entry)
+    assert result["url"] == "https://developers.facebook.com/blog/post/x/"
+    assert result["title"] == "Post Title"
+
+
+def test_run_filters_out_entry_missing_title(source, monkeypatch):
+    monkeypatch.setattr(source, "fetch", lambda: [_NO_TITLE_CARD_HTML])
+    result = source.run()
+    assert result == []
