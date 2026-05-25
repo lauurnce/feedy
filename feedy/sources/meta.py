@@ -32,7 +32,27 @@ class MetaSource(BaseFeedSource):
             return []
 
     def parse(self, raw: list) -> list[dict]:
-        return []
+        if not raw:
+            return []
+        soup = BeautifulSoup(raw[0], "html.parser")
+        cards = soup.select(_CARD_SELECTOR)
+        results = []
+        for card in cards:
+            href = card.get("href", "")
+            if href.startswith("/"):
+                href = f"{_BASE_URL}{href}"
+            if not href:
+                continue
+            title_el = card.select_one("h3")
+            if not title_el:
+                continue
+            date_el = card.select_one("h6")
+            results.append({
+                "title": title_el.get_text(strip=True),
+                "url": href,
+                "date": _parse_date(date_el.get_text(strip=True) if date_el else ""),
+            })
+        return results
 
     def to_dict(self, entry: dict) -> FeedEntry:
         return FeedEntry(
@@ -42,3 +62,10 @@ class MetaSource(BaseFeedSource):
             source=self.name,
             summary="",
         )
+
+
+def _parse_date(raw: str) -> str:
+    try:
+        return datetime.strptime(raw.title(), "%B %d, %Y").strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
