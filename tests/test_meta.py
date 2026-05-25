@@ -1,3 +1,5 @@
+import textwrap
+
 import pytest
 from feedy.sources.meta import MetaSource
 
@@ -10,8 +12,6 @@ def source():
 def test_source_name(source):
     assert source.name == "meta"
 
-
-import textwrap
 
 _TWO_CARDS_HTML = textwrap.dedent("""\
     <html><body>
