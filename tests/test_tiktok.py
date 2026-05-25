@@ -78,3 +78,29 @@ def test_parse_returns_empty_for_empty_input(source):
 def test_parse_preserves_absolute_url_unchanged(source):
     result = source.parse([_ABSOLUTE_URL_HTML])
     assert result[0]["url"] == "https://developers.tiktok.com/blog/absolute"
+
+
+def test_to_dict_sets_source_to_tiktok(source):
+    entry = {"url": "https://developers.tiktok.com/blog/x", "title": "X", "date": ""}
+    result = source.to_dict(entry)
+    assert result["source"] == "tiktok"
+
+
+def test_to_dict_sets_empty_date_and_summary(source):
+    entry = {"url": "https://developers.tiktok.com/blog/x", "title": "X", "date": ""}
+    result = source.to_dict(entry)
+    assert result["date"] == ""
+    assert result["summary"] == ""
+
+
+def test_to_dict_preserves_url_and_title(source):
+    entry = {"url": "https://developers.tiktok.com/blog/x", "title": "Post Title", "date": ""}
+    result = source.to_dict(entry)
+    assert result["url"] == "https://developers.tiktok.com/blog/x"
+    assert result["title"] == "Post Title"
+
+
+def test_run_filters_out_entry_missing_url(source, monkeypatch):
+    monkeypatch.setattr(source, "fetch", lambda: [_NO_TITLE_CARD_HTML])
+    result = source.run()
+    assert result == []

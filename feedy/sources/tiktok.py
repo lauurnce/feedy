@@ -51,4 +51,10 @@ class TikTokSource(BaseFeedSource):
         return results
 
     def to_dict(self, entry: dict) -> FeedEntry:
-        raise NotImplementedError
+        return FeedEntry(
+            url=entry["url"],
+            title=entry["title"],
+            date=entry.get("date", ""),
+            source=self.name,
+            summary="",
+        )
