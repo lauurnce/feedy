@@ -40,6 +40,8 @@ class TikTokSource(BaseFeedSource):
             href = card.get("href", "")
             if href.startswith("/"):
                 href = f"{_BASE_URL}{href}"
+            if not href:
+                continue
             title_el = card.select_one(_TITLE_SELECTOR)
             if not title_el:
                 continue

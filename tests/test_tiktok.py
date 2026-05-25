@@ -100,7 +100,7 @@ def test_to_dict_preserves_url_and_title(source):
     assert result["title"] == "Post Title"
 
 
-def test_run_filters_out_entry_missing_url(source, monkeypatch):
+def test_run_filters_out_entry_missing_title(source, monkeypatch):
     monkeypatch.setattr(source, "fetch", lambda: [_NO_TITLE_CARD_HTML])
     result = source.run()
     assert result == []
