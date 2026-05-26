@@ -37,6 +37,15 @@ def test_fetch_prints_per_source_summary(
     runner = CliRunner()
     result = runner.invoke(cli, ["fetch"])
 
+    # Assert run() called exactly once per source
+    mock_telegram_cls.return_value.run.assert_called_once()
+    mock_tiktok_cls.return_value.run.assert_called_once()
+    mock_meta_cls.return_value.run.assert_called_once()
+    mock_hn_cls.return_value.run.assert_called_once()
+
+    # Assert save_many called 4 times (once per source)
+    assert mock_storage.save_many.call_count == 4
+
     assert result.exit_code == 0
     assert "[telegram] 3 new, 0 skipped" in result.output
     assert "[tiktok] 1 new, 1 skipped" in result.output

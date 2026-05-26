@@ -29,7 +29,7 @@ def fetch():
             click.echo(f"[{source.name}] {saved} new, {skipped} skipped")
             total_saved += saved
         except Exception as e:
-            click.echo(f"[{source.name}] error: {e}")
+            click.echo(f"[{source.name}] error: {e}", err=True)
 
     click.echo("---")
     click.echo(f"Total: {total_saved} new entries saved.")
