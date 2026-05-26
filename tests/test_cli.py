@@ -1,4 +1,4 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from click.testing import CliRunner
 from feedy.cli import cli
 
@@ -96,4 +96,6 @@ def test_fetch_continues_after_source_error(
 
     assert result.exit_code == 0
     assert "[telegram] error: network down" in result.output
-    assert "[tiktok]" in result.output
+    assert "[tiktok] 0 new, 0 skipped" in result.output
+    assert "[meta] 0 new, 0 skipped" in result.output
+    assert "[hackernews] 0 new, 0 skipped" in result.output
