@@ -1,5 +1,11 @@
 import click
 
+import feedy.storage as storage
+from feedy.sources.hackernews import HackerNewsSource
+from feedy.sources.meta import MetaSource
+from feedy.sources.telegram import TelegramSource
+from feedy.sources.tiktok import TikTokSource
+
 
 @click.group()
 def cli():
@@ -9,7 +15,24 @@ def cli():
 @cli.command()
 def fetch():
     """Fetch latest entries from all configured sources."""
-    click.echo("fetch: not yet implemented")
+    sources = [
+        TelegramSource(),
+        TikTokSource(),
+        MetaSource(),
+        HackerNewsSource(),
+    ]
+    total_saved = 0
+    for source in sources:
+        try:
+            entries = source.run()
+            saved, skipped = storage.save_many(entries)
+            click.echo(f"[{source.name}] {saved} new, {skipped} skipped")
+            total_saved += saved
+        except Exception as e:
+            click.echo(f"[{source.name}] error: {e}")
+
+    click.echo("---")
+    click.echo(f"Total: {total_saved} new entries saved.")
 
 
 @cli.command("list")
