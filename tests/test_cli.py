@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import patch
 from click.testing import CliRunner
 from feedy.cli import cli
@@ -187,3 +188,117 @@ def test_list_truncates_long_title(mock_storage):
     result = runner.invoke(cli, ["list"])
     assert "A" * 45 in result.output
     assert "A" * 60 not in result.output
+
+
+def _make_digest_entries(source_name, count):
+    return [
+        {"url": f"https://{source_name}.com/{i}", "title": f"Title {i}", "date": "2026-05-29", "source": source_name, "summary": ""}
+        for i in range(count)
+    ]
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_no_entries_prints_message(mock_storage, mock_summarize, mock_build_digest):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    result = runner.invoke(cli, ["digest"])
+    assert result.exit_code == 0
+    assert "No entries found." in result.output
+    mock_summarize.assert_not_called()
+    mock_build_digest.assert_not_called()
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_calls_summarize_with_entries(mock_storage, mock_summarize, mock_build_digest):
+    entries = _make_digest_entries("hackernews", 2)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = ""
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_summarize.assert_called_once_with(entries)
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_calls_build_digest_with_summarized(mock_storage, mock_summarize, mock_build_digest):
+    entries = _make_digest_entries("hackernews", 1)
+    summarized = [{**entries[0], "summary": "A great summary."}]
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = summarized
+    mock_build_digest.return_value = "## Hackernews\n• Title 0 — A great summary."
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_build_digest.assert_called_once_with(summarized)
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_prints_build_digest_output(mock_storage, mock_summarize, mock_build_digest):
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "## Hackernews\n• Title 0"
+    runner = CliRunner()
+    result = runner.invoke(cli, ["digest"])
+    assert result.exit_code == 0
+    assert "## Hackernews" in result.output
+    assert "Title 0" in result.output
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_defaults_since_to_today(mock_storage, mock_summarize, mock_build_digest):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    today = datetime.now().strftime("%Y-%m-%d")
+    mock_storage.get_entries.assert_called_once_with(source=None, since=today)
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_since_option_passed_to_storage(mock_storage, mock_summarize, mock_build_digest):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    runner.invoke(cli, ["digest", "--since", "2026-05-01"])
+    mock_storage.get_entries.assert_called_once_with(source=None, since="2026-05-01")
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_source_option_passed_to_storage(mock_storage, mock_summarize, mock_build_digest):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    runner.invoke(cli, ["digest", "--source", "hackernews"])
+    kwargs = mock_storage.get_entries.call_args[1]
+    assert kwargs["source"] == "hackernews"
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_persists_new_summaries(mock_storage, mock_summarize, mock_build_digest):
+    entries = [
+        {"url": "https://hn.com/1", "title": "Post A", "date": "2026-05-29", "source": "hackernews", "summary": ""},
+        {"url": "https://hn.com/2", "title": "Post B", "date": "2026-05-29", "source": "hackernews", "summary": "Already summarized."},
+    ]
+    summarized = [
+        {"url": "https://hn.com/1", "title": "Post A", "date": "2026-05-29", "source": "hackernews", "summary": "New AI summary."},
+        {"url": "https://hn.com/2", "title": "Post B", "date": "2026-05-29", "source": "hackernews", "summary": "Already summarized."},
+    ]
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = summarized
+    mock_build_digest.return_value = ""
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_storage.update_summary.assert_called_once_with("https://hn.com/1", "New AI summary.")
