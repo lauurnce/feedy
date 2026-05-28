@@ -16,7 +16,7 @@ def build_digest(entries: list[FeedEntry]) -> str:
 
     sections = []
     for source in sorted(groups):
-        lines = [f"## {source.capitalize()}"]
+        lines = [f"## {source.title()}"]
         for entry in groups[source]:
             if entry["summary"]:
                 lines.append(f"• {entry['title']} — {entry['summary']}")
