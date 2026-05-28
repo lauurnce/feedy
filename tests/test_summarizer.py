@@ -57,3 +57,19 @@ def test_summarize_prompt_contains_title_url_source():
     assert entry["title"] in prompt
     assert entry["url"] in prompt
     assert entry["source"] in prompt
+
+
+def test_summarize_prompt_instructs_why_it_matters():
+    entry = {**_ENTRY}
+    with patch("feedy.summarizer.complete", return_value="Summary.") as mock_complete:
+        summarize([entry])
+    prompt = mock_complete.call_args.args[0]
+    assert "Why it matters:" in prompt
+
+
+def test_summarize_prompt_requests_three_sentences():
+    entry = {**_ENTRY}
+    with patch("feedy.summarizer.complete", return_value="Summary.") as mock_complete:
+        summarize([entry])
+    prompt = mock_complete.call_args.args[0]
+    assert "3 sentences" in prompt
