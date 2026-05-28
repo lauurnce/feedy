@@ -20,6 +20,8 @@ def test_multiple_sources_sorted_alphabetically():
         {"url": "https://ex.com/2", "title": "Post 2", "date": "2026-05-29", "source": "hackernews", "summary": "Sum 2."},
     ]
     result = build_digest(entries)
+    assert "## Hackernews" in result
+    assert "## Telegram" in result
     assert result.index("## Hackernews") < result.index("## Telegram")
 
 
@@ -39,4 +41,5 @@ def test_groups_separated_by_blank_line():
         {"url": "https://ex.com/2", "title": "Post 2", "date": "2026-05-29", "source": "meta", "summary": "Sum 2."},
     ]
     result = build_digest(entries)
-    assert "\n\n" in result
+    sections = result.split("\n\n")
+    assert len(sections) == 2
