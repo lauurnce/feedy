@@ -78,3 +78,24 @@ def all_entries() -> list[dict]:
         return [dict(r) for r in rows]
     finally:
         conn.close()
+
+
+def get_entries(source: str | None = None, since: str | None = None) -> list[dict]:
+    conn = _connect()
+    try:
+        conditions = []
+        params: list[str] = []
+        if source is not None:
+            conditions.append("source = ?")
+            params.append(source)
+        if since is not None:
+            conditions.append("date >= ?")
+            params.append(since)
+        where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+        rows = conn.execute(
+            f"SELECT * FROM entries {where} ORDER BY created_at DESC",
+            params,
+        ).fetchall()
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
