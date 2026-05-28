@@ -10,7 +10,7 @@
 - [x] Day 07 — TikTokSource: scrape developers.tiktok.com/blog
 - [x] Day 08 — MetaSource: scrape developers.facebook.com/blog
 - [x] Day 09 — CLI entry point: `feedwise fetch` command using Click
-- [ ] Day 10 — CLI: `feedwise list` — show saved entries from DB in terminal
+- [x] Day 10 — CLI: `feedwise list` — show saved entries from DB in terminal
 
 ## Week 3 — AI Summarizer
 - [ ] Day 11 — Anthropic API integration module (client wrapper + error handling)
