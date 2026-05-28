@@ -2,6 +2,7 @@ from datetime import datetime
 from unittest.mock import patch
 from click.testing import CliRunner
 from feedy.cli import cli
+from feedy.config import Config
 
 
 def _make_entries(source_name, count):
@@ -11,14 +12,16 @@ def _make_entries(source_name, count):
     ]
 
 
+@patch("feedy.cli.load_config")
 @patch("feedy.cli.storage")
 @patch("feedy.cli.HackerNewsSource")
 @patch("feedy.cli.MetaSource")
 @patch("feedy.cli.TikTokSource")
 @patch("feedy.cli.TelegramSource")
 def test_fetch_prints_per_source_summary(
-    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage
+    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage, mock_load_config
 ):
+    mock_load_config.return_value = Config(sources=["telegram", "tiktok", "meta", "hackernews"])
     mock_telegram_cls.return_value.name = "telegram"
     mock_telegram_cls.return_value.run.return_value = _make_entries("telegram", 3)
     mock_tiktok_cls.return_value.name = "tiktok"
@@ -55,14 +58,16 @@ def test_fetch_prints_per_source_summary(
     assert "Total: 8 new entries saved." in result.output
 
 
+@patch("feedy.cli.load_config")
 @patch("feedy.cli.storage")
 @patch("feedy.cli.HackerNewsSource")
 @patch("feedy.cli.MetaSource")
 @patch("feedy.cli.TikTokSource")
 @patch("feedy.cli.TelegramSource")
 def test_fetch_total_counts_only_saved(
-    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage
+    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage, mock_load_config
 ):
+    mock_load_config.return_value = Config(sources=["telegram", "tiktok", "meta", "hackernews"])
     for cls, name in [
         (mock_telegram_cls, "telegram"),
         (mock_tiktok_cls, "tiktok"),
@@ -81,14 +86,16 @@ def test_fetch_total_counts_only_saved(
     assert "Total: 3 new entries saved." in result.output
 
 
+@patch("feedy.cli.load_config")
 @patch("feedy.cli.storage")
 @patch("feedy.cli.HackerNewsSource")
 @patch("feedy.cli.MetaSource")
 @patch("feedy.cli.TikTokSource")
 @patch("feedy.cli.TelegramSource")
 def test_fetch_continues_after_source_error(
-    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage
+    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage, mock_load_config
 ):
+    mock_load_config.return_value = Config(sources=["telegram", "tiktok", "meta", "hackernews"])
     mock_telegram_cls.return_value.name = "telegram"
     mock_telegram_cls.return_value.run.side_effect = RuntimeError("network down")
 
@@ -109,6 +116,34 @@ def test_fetch_continues_after_source_error(
     assert "[tiktok] 0 new, 0 skipped" in result.output
     assert "[meta] 0 new, 0 skipped" in result.output
     assert "[hackernews] 0 new, 0 skipped" in result.output
+
+
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.storage")
+@patch("feedy.cli.HackerNewsSource")
+@patch("feedy.cli.MetaSource")
+@patch("feedy.cli.TikTokSource")
+@patch("feedy.cli.TelegramSource")
+def test_fetch_only_runs_configured_sources(
+    mock_telegram_cls, mock_tiktok_cls, mock_meta_cls, mock_hn_cls, mock_storage, mock_load_config
+):
+    mock_load_config.return_value = Config(sources=["telegram", "hackernews"])
+    mock_telegram_cls.return_value.name = "telegram"
+    mock_telegram_cls.return_value.run.return_value = []
+    mock_hn_cls.return_value.name = "hackernews"
+    mock_hn_cls.return_value.run.return_value = []
+    mock_storage.save_many.return_value = (0, 0)
+
+    runner = CliRunner()
+    result = runner.invoke(cli, ["fetch"])
+
+    mock_telegram_cls.return_value.run.assert_called_once()
+    mock_hn_cls.return_value.run.assert_called_once()
+    mock_tiktok_cls.return_value.run.assert_not_called()
+    mock_meta_cls.return_value.run.assert_not_called()
+    assert result.exit_code == 0
+    assert "[telegram]" in result.output
+    assert "[hackernews]" in result.output
 
 
 def _make_list_entry(id_, source, date, title, url):

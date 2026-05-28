@@ -2,6 +2,7 @@ import click
 from datetime import datetime
 
 import feedy.storage as storage
+from feedy.config import load_config
 from feedy.digest import build_digest
 from feedy.summarizer import summarize
 from feedy.sources.hackernews import HackerNewsSource
@@ -15,15 +16,21 @@ def cli():
     """feedy — developer blog feed aggregator."""
 
 
+def _build_sources(names):
+    registry = {
+        "telegram": TelegramSource,
+        "tiktok": TikTokSource,
+        "meta": MetaSource,
+        "hackernews": HackerNewsSource,
+    }
+    return [registry[name]() for name in names if name in registry]
+
+
 @cli.command()
 def fetch():
     """Fetch latest entries from all configured sources."""
-    sources = [
-        TelegramSource(),
-        TikTokSource(),
-        MetaSource(),
-        HackerNewsSource(),
-    ]
+    config = load_config()
+    sources = _build_sources(config.sources)
     total_saved = 0
     for source in sources:
         try:
