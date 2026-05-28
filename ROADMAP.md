@@ -13,7 +13,7 @@
 - [x] Day 10 — CLI: `feedwise list` — show saved entries from DB in terminal
 
 ## Week 3 — AI Summarizer
-- [ ] Day 11 — Anthropic API integration module (client wrapper + error handling)
+- [x] Day 11 — Anthropic API integration module (client wrapper + error handling)
 - [ ] Day 12 — Summarizer: takes raw entries, returns 2-sentence AI summary per item
 - [ ] Day 13 — Digest builder: groups entries by platform, formats into readable digest
 - [ ] Day 14 — CLI: `feedwise digest` — run summarizer and print today's digest
