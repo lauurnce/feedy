@@ -43,3 +43,24 @@ def test_groups_separated_by_blank_line():
     result = build_digest(entries)
     sections = result.split("\n\n")
     assert len(sections) == 2
+
+
+def test_plain_format_has_no_markdown_header():
+    entries = [{"url": "https://ex.com", "title": "My Post", "date": "2026-05-29", "source": "telegram", "summary": "Sum."}]
+    result = build_digest(entries, output_format="plain")
+    assert "## " not in result
+    assert "TELEGRAM" in result
+
+
+def test_plain_format_uses_dash_bullet():
+    entries = [{"url": "https://ex.com", "title": "My Post", "date": "2026-05-29", "source": "telegram", "summary": "Sum."}]
+    result = build_digest(entries, output_format="plain")
+    assert "- My Post — Sum." in result
+    assert "•" not in result
+
+
+def test_markdown_is_default():
+    entries = [{"url": "https://ex.com", "title": "My Post", "date": "2026-05-29", "source": "telegram", "summary": "Sum."}]
+    result = build_digest(entries)
+    assert "## Telegram" in result
+    assert "• My Post — Sum." in result

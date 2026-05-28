@@ -5,7 +5,7 @@ from collections import defaultdict
 from feedy.sources.base import FeedEntry
 
 
-def build_digest(entries: list[FeedEntry]) -> str:
+def build_digest(entries: list[FeedEntry], output_format: str = "markdown") -> str:
     """Group entries by source and format as a readable digest string."""
     if not entries:
         return ""
@@ -16,12 +16,18 @@ def build_digest(entries: list[FeedEntry]) -> str:
 
     sections = []
     for source in sorted(groups):
-        lines = [f"## {source.title()}"]
+        if output_format == "plain":
+            header = source.upper()
+            bullet = "- "
+        else:
+            header = f"## {source.title()}"
+            bullet = "• "
+        lines = [header]
         for entry in groups[source]:
             if entry["summary"]:
-                lines.append(f"• {entry['title']} — {entry['summary']}")
+                lines.append(f"{bullet}{entry['title']} — {entry['summary']}")
             else:
-                lines.append(f"• {entry['title']}")
+                lines.append(f"{bullet}{entry['title']}")
         sections.append("\n".join(lines))
 
     return "\n\n".join(sections)
