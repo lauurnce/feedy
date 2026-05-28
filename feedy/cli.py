@@ -1,4 +1,5 @@
 import click
+from datetime import datetime
 
 import feedy.storage as storage
 from feedy.sources.hackernews import HackerNewsSource
@@ -36,9 +37,28 @@ def fetch():
 
 
 @cli.command("list")
-def list_entries():
+@click.option("--source", default=None, help="Filter by source name.")
+@click.option("--since", default=None, help="Filter entries on or after date (YYYY-MM-DD).")
+def list_entries(source, since):
     """List saved entries from the database."""
-    click.echo("list: not yet implemented")
+    if since is not None:
+        try:
+            datetime.strptime(since, "%Y-%m-%d")
+        except ValueError:
+            raise click.BadParameter("use YYYY-MM-DD format", param_hint="'--since'")
+
+    entries = storage.get_entries(source=source, since=since)
+
+    if not entries:
+        click.echo("No entries found.")
+        return
+
+    header = f"{'ID':<5} {'SOURCE':<13} {'DATE':<12} {'TITLE':<47} URL"
+    click.echo(header)
+    for e in entries:
+        title = (e["title"] or "")[:45]
+        row = f"{e['id']:<5} {(e['source'] or ''):<13} {(e['date'] or ''):<12} {title:<47} {e['url']}"
+        click.echo(row)
 
 
 @cli.command()
