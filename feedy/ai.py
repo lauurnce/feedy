@@ -22,6 +22,6 @@ def complete(prompt: str) -> str | None:
         )
     except anthropic.APIError:
         return None
-    if not message.content:
+    if not message.content or not hasattr(message.content[0], "text"):
         return None
     return message.content[0].text.strip()

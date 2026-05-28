@@ -56,3 +56,15 @@ def test_complete_empty_content(monkeypatch):
     with patch("feedy.ai.anthropic.Anthropic", return_value=mock_client):
         result = complete("say hello")
     assert result is None
+
+
+def test_complete_non_text_content(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    msg = MagicMock()
+    non_text_block = MagicMock(spec=[])  # no .text attribute
+    msg.content = [non_text_block]
+    mock_client = MagicMock()
+    mock_client.messages.create.return_value = msg
+    with patch("feedy.ai.anthropic.Anthropic", return_value=mock_client):
+        result = complete("say hello")
+    assert result is None
