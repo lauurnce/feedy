@@ -78,3 +78,40 @@ def test_update_summary_persists_new_summary():
 def test_update_summary_returns_false_when_url_missing():
     result = storage.update_summary("https://notexist.com", "ghost")
     assert result is False
+
+
+def test_get_entries_empty_db():
+    entries = storage.get_entries()
+    assert entries == []
+
+
+def test_get_entries_no_filter():
+    storage.save({"url": "https://a.com", "title": "A", "date": "2026-05-27", "source": "hackernews", "summary": ""})
+    storage.save({"url": "https://b.com", "title": "B", "date": "2026-05-26", "source": "telegram", "summary": ""})
+    entries = storage.get_entries()
+    assert len(entries) == 2
+
+
+def test_get_entries_filter_source():
+    storage.save({"url": "https://a.com", "title": "A", "date": "2026-05-27", "source": "hackernews", "summary": ""})
+    storage.save({"url": "https://b.com", "title": "B", "date": "2026-05-26", "source": "telegram", "summary": ""})
+    entries = storage.get_entries(source="hackernews")
+    assert len(entries) == 1
+    assert entries[0]["source"] == "hackernews"
+
+
+def test_get_entries_filter_since():
+    storage.save({"url": "https://a.com", "title": "A", "date": "2026-05-25", "source": "x", "summary": ""})
+    storage.save({"url": "https://b.com", "title": "B", "date": "2026-05-27", "source": "x", "summary": ""})
+    entries = storage.get_entries(since="2026-05-26")
+    assert len(entries) == 1
+    assert entries[0]["url"] == "https://b.com"
+
+
+def test_get_entries_both_filters():
+    storage.save({"url": "https://a.com", "title": "A", "date": "2026-05-27", "source": "hackernews", "summary": ""})
+    storage.save({"url": "https://b.com", "title": "B", "date": "2026-05-27", "source": "telegram", "summary": ""})
+    storage.save({"url": "https://c.com", "title": "C", "date": "2026-05-25", "source": "hackernews", "summary": ""})
+    entries = storage.get_entries(source="hackernews", since="2026-05-26")
+    assert len(entries) == 1
+    assert entries[0]["url"] == "https://a.com"
