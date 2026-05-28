@@ -16,7 +16,7 @@
 - [x] Day 11 — Anthropic API integration module (client wrapper + error handling)
 - [x] Day 12 — Summarizer: takes raw entries, returns 2-sentence AI summary per item
 - [x] Day 13 — Digest builder: groups entries by platform, formats into readable digest
-- [ ] Day 14 — CLI: `feedwise digest` — run summarizer and print today's digest
+- [x] Day 14 — CLI: `feedwise digest` — run summarizer and print today's digest
 - [ ] Day 15 — Prompt tuning: improve summary quality, add "why it matters for devs" line
 
 ## Week 4 — Polish
