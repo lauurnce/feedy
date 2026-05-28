@@ -14,7 +14,7 @@
 
 ## Week 3 — AI Summarizer
 - [x] Day 11 — Anthropic API integration module (client wrapper + error handling)
-- [ ] Day 12 — Summarizer: takes raw entries, returns 2-sentence AI summary per item
+- [x] Day 12 — Summarizer: takes raw entries, returns 2-sentence AI summary per item
 - [ ] Day 13 — Digest builder: groups entries by platform, formats into readable digest
 - [ ] Day 14 — CLI: `feedwise digest` — run summarizer and print today's digest
 - [ ] Day 15 — Prompt tuning: improve summary quality, add "why it matters for devs" line
