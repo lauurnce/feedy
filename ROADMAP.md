@@ -17,7 +17,7 @@
 - [x] Day 12 — Summarizer: takes raw entries, returns 2-sentence AI summary per item
 - [x] Day 13 — Digest builder: groups entries by platform, formats into readable digest
 - [x] Day 14 — CLI: `feedwise digest` — run summarizer and print today's digest
-- [ ] Day 15 — Prompt tuning: improve summary quality, add "why it matters for devs" line
+- [x] Day 15 — Prompt tuning: improve summary quality, add "why it matters for devs" line
 
 ## Week 4 — Polish
 - [ ] Day 16 — Config file support: sources to track, API key, output format (YAML/TOML)
