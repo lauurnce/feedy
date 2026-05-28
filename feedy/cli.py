@@ -2,6 +2,8 @@ import click
 from datetime import datetime
 
 import feedy.storage as storage
+from feedy.digest import build_digest
+from feedy.summarizer import summarize
 from feedy.sources.hackernews import HackerNewsSource
 from feedy.sources.meta import MetaSource
 from feedy.sources.telegram import TelegramSource
@@ -62,9 +64,25 @@ def list_entries(source, since):
 
 
 @cli.command()
-def digest():
+@click.option("--since", default=None, help="Filter entries on or after date (YYYY-MM-DD). Defaults to today.")
+@click.option("--source", default=None, help="Filter by source name.")
+def digest(since, source):
     """Generate and print today's AI digest."""
-    click.echo("digest: not yet implemented")
+    if since is None:
+        since = datetime.now().strftime("%Y-%m-%d")
+
+    entries = storage.get_entries(source=source, since=since)
+    if not entries:
+        click.echo("No entries found.")
+        return
+
+    summarized = summarize(entries)
+
+    for original, updated in zip(entries, summarized):
+        if updated["summary"] and updated["summary"] != original["summary"]:
+            storage.update_summary(updated["url"], updated["summary"])
+
+    click.echo(build_digest(summarized))
 
 
 if __name__ == "__main__":
