@@ -108,3 +108,82 @@ def test_fetch_continues_after_source_error(
     assert "[tiktok] 0 new, 0 skipped" in result.output
     assert "[meta] 0 new, 0 skipped" in result.output
     assert "[hackernews] 0 new, 0 skipped" in result.output
+
+
+def _make_list_entry(id_, source, date, title, url):
+    return {"id": id_, "source": source, "date": date, "title": title, "url": url, "summary": ""}
+
+
+@patch("feedy.cli.storage")
+def test_list_prints_table_header(mock_storage):
+    mock_storage.get_entries.return_value = [
+        _make_list_entry(1, "hackernews", "2026-05-27", "Test Entry", "https://hn.com/1")
+    ]
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list"])
+    assert result.exit_code == 0
+    assert "ID" in result.output
+    assert "SOURCE" in result.output
+    assert "DATE" in result.output
+    assert "TITLE" in result.output
+    assert "URL" in result.output
+
+
+@patch("feedy.cli.storage")
+def test_list_shows_entries(mock_storage):
+    mock_storage.get_entries.return_value = [
+        _make_list_entry(1, "hackernews", "2026-05-27", "Entry One", "https://hn.com/1"),
+        _make_list_entry(2, "telegram", "2026-05-26", "Entry Two", "https://t.me/2"),
+    ]
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list"])
+    assert result.exit_code == 0
+    assert "Entry One" in result.output
+    assert "Entry Two" in result.output
+    assert "hackernews" in result.output
+    assert "telegram" in result.output
+
+
+@patch("feedy.cli.storage")
+def test_list_no_entries(mock_storage):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list"])
+    assert result.exit_code == 0
+    assert "No entries found." in result.output
+
+
+@patch("feedy.cli.storage")
+def test_list_filter_by_source(mock_storage):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    runner.invoke(cli, ["list", "--source", "hackernews"])
+    mock_storage.get_entries.assert_called_once_with(source="hackernews", since=None)
+
+
+@patch("feedy.cli.storage")
+def test_list_filter_by_since(mock_storage):
+    mock_storage.get_entries.return_value = []
+    runner = CliRunner()
+    runner.invoke(cli, ["list", "--since", "2026-05-01"])
+    mock_storage.get_entries.assert_called_once_with(source=None, since="2026-05-01")
+
+
+@patch("feedy.cli.storage")
+def test_list_invalid_since(mock_storage):
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list", "--since", "bad-date"])
+    assert result.exit_code != 0
+    assert "YYYY-MM-DD" in result.output
+
+
+@patch("feedy.cli.storage")
+def test_list_truncates_long_title(mock_storage):
+    long_title = "A" * 60
+    mock_storage.get_entries.return_value = [
+        _make_list_entry(1, "x", "2026-05-27", long_title, "https://x.com/1")
+    ]
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list"])
+    assert "A" * 45 in result.output
+    assert "A" * 60 not in result.output
