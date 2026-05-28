@@ -18,9 +18,16 @@ def summarize(entries: list[FeedEntry]) -> list[FeedEntry]:
 
 def _build_prompt(entry: FeedEntry) -> str:
     return (
-        "Summarize this developer blog post in exactly 2 sentences.\n"
+        "Summarize this developer blog post.\n\n"
         f"Title: {entry['title']}\n"
         f"URL: {entry['url']}\n"
         f"Source: {entry['source']}\n\n"
-        "Focus on what changed or was announced and why it matters to developers."
+        "Write exactly 3 sentences using this format:\n"
+        "Sentence 1: What was announced or changed.\n"
+        "Sentence 2: The key technical detail or how it works.\n"
+        'Sentence 3: Start with "Why it matters:" followed by the impact for developers.\n\n'
+        "Example:\n"
+        "Telegram launches Stories API for bots with support for rich media up to 100MB. "
+        "Developers can create, schedule, and react to story interactions via a REST endpoint with OAuth scoping. "
+        "Why it matters: Bots can now run announcement campaigns and interactive polls previously limited to human accounts."
     )
