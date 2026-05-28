@@ -53,7 +53,7 @@ def test_summarize_prompt_contains_title_url_source():
     entry = {**_ENTRY}
     with patch("feedy.summarizer.complete", return_value="Summary.") as mock_complete:
         summarize([entry])
-    prompt = mock_complete.call_args[0][0]
+    prompt = mock_complete.call_args.args[0]
     assert entry["title"] in prompt
     assert entry["url"] in prompt
     assert entry["source"] in prompt
