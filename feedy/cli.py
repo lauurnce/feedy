@@ -1,5 +1,6 @@
 import click
 from datetime import datetime
+from pathlib import Path
 
 import feedy.storage as storage
 from feedy.config import load_config
@@ -73,7 +74,9 @@ def list_entries(source, since):
 @cli.command()
 @click.option("--since", default=None, help="Filter entries on or after date (YYYY-MM-DD). Defaults to today.")
 @click.option("--source", default=None, help="Filter by source name.")
-def digest(since, source):
+@click.option("--output", "-o", default=None, type=click.Path(dir_okay=False, writable=True),
+              help="Write the digest to a file instead of printing it.")
+def digest(since, source, output):
     """Generate and print today's AI digest."""
     if since is None:
         since = datetime.now().strftime("%Y-%m-%d")
@@ -90,7 +93,13 @@ def digest(since, source):
         if updated["summary"] and updated["summary"] != original["summary"]:
             storage.update_summary(updated["url"], updated["summary"])
 
-    click.echo(build_digest(summarized, config.output_format))
+    text = build_digest(summarized, config.output_format)
+
+    if output:
+        Path(output).write_text(text + "\n", encoding="utf-8")
+        click.echo(f"Digest written to {output}")
+    else:
+        click.echo(text)
 
 
 if __name__ == "__main__":

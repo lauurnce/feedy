@@ -354,3 +354,52 @@ def test_digest_uses_config_output_format(mock_storage, mock_summarize, mock_bui
     runner = CliRunner()
     runner.invoke(cli, ["digest"])
     mock_build_digest.assert_called_once_with(entries, "plain")
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_output_writes_file(mock_storage, mock_summarize, mock_build_digest):
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "## Hackernews\n• Title 0 — summary."
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        result = runner.invoke(cli, ["digest", "--output", "report.md"])
+        assert result.exit_code == 0
+        with open("report.md", encoding="utf-8") as f:
+            content = f.read()
+    assert content == "## Hackernews\n• Title 0 — summary.\n"
+    assert "report.md" in result.output
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_output_does_not_print_digest_body(mock_storage, mock_summarize, mock_build_digest):
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "## Hackernews\n• Title 0 — summary."
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        result = runner.invoke(cli, ["digest", "-o", "report.md"])
+    assert result.exit_code == 0
+    assert "• Title 0" not in result.output
+
+
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_output_short_flag(mock_storage, mock_summarize, mock_build_digest):
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "digest"
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        result = runner.invoke(cli, ["digest", "-o", "out.md"])
+        assert result.exit_code == 0
+        import os
+        assert os.path.exists("out.md")
