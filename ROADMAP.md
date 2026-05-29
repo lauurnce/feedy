@@ -23,7 +23,7 @@
 - [x] Day 16 — Config file support: sources to track, API key, output format (YAML/TOML)
 - [x] Day 17 — Export digest to Markdown file (feedwise digest --output report.md)
 - [x] Day 18 — GitHub Actions workflow: run `feedwise fetch` daily on schedule
-- [ ] Day 19 — Full README with install guide, usage examples, screenshot
+- [x] Day 19 — Full README with install guide, usage examples, screenshot
 - [ ] Day 20 — CONTRIBUTING.md + guide for adding a new source in 10 lines
 
 ## Week 5+ — Community Features
