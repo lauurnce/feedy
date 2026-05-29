@@ -83,13 +83,14 @@ def digest(since, source):
         click.echo("No entries found.")
         return
 
+    config = load_config()
     summarized = summarize(entries)
 
     for original, updated in zip(entries, summarized):
         if updated["summary"] and updated["summary"] != original["summary"]:
             storage.update_summary(updated["url"], updated["summary"])
 
-    click.echo(build_digest(summarized))
+    click.echo(build_digest(summarized, config.output_format))
 
 
 if __name__ == "__main__":

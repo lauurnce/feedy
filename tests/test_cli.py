@@ -258,10 +258,12 @@ def test_digest_calls_summarize_with_entries(mock_storage, mock_summarize, mock_
     mock_summarize.assert_called_once_with(entries)
 
 
+@patch("feedy.cli.load_config")
 @patch("feedy.cli.build_digest")
 @patch("feedy.cli.summarize")
 @patch("feedy.cli.storage")
-def test_digest_calls_build_digest_with_summarized(mock_storage, mock_summarize, mock_build_digest):
+def test_digest_calls_build_digest_with_summarized(mock_storage, mock_summarize, mock_build_digest, mock_load_config):
+    mock_load_config.return_value = Config(output_format="markdown")
     entries = _make_digest_entries("hackernews", 1)
     summarized = [{**entries[0], "summary": "A great summary."}]
     mock_storage.get_entries.return_value = entries
@@ -269,7 +271,7 @@ def test_digest_calls_build_digest_with_summarized(mock_storage, mock_summarize,
     mock_build_digest.return_value = "## Hackernews\n• Title 0 — A great summary."
     runner = CliRunner()
     runner.invoke(cli, ["digest"])
-    mock_build_digest.assert_called_once_with(summarized)
+    mock_build_digest.assert_called_once_with(summarized, "markdown")
 
 
 @patch("feedy.cli.build_digest")
@@ -337,3 +339,18 @@ def test_digest_persists_new_summaries(mock_storage, mock_summarize, mock_build_
     runner = CliRunner()
     runner.invoke(cli, ["digest"])
     mock_storage.update_summary.assert_called_once_with("https://hn.com/1", "New AI summary.")
+
+
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_uses_config_output_format(mock_storage, mock_summarize, mock_build_digest, mock_load_config):
+    mock_load_config.return_value = Config(output_format="plain")
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = ""
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_build_digest.assert_called_once_with(entries, "plain")
