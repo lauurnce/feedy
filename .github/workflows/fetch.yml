@@ -1,0 +1,36 @@
+name: Daily fetch
+
+on:
+  schedule:
+    # 06:00 UTC every day
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install feedy
+        run: pip install -e .
+
+      # Restore the SQLite DB from the most recent run so dedup works
+      # across days. A fresh key is written each run; restore-keys grabs
+      # the latest existing cache as a starting point.
+      - name: Restore feed database
+        uses: actions/cache@v4
+        with:
+          path: ~/.feedy
+          key: feedy-db-${{ github.run_id }}
+          restore-keys: |
+            feedy-db-
+
+      - name: Fetch latest entries
+        run: feedy fetch
