@@ -24,7 +24,7 @@
 - [x] Day 17 — Export digest to Markdown file (feedwise digest --output report.md)
 - [x] Day 18 — GitHub Actions workflow: run `feedwise fetch` daily on schedule
 - [x] Day 19 — Full README with install guide, usage examples, screenshot
-- [ ] Day 20 — CONTRIBUTING.md + guide for adding a new source in 10 lines
+- [x] Day 20 — CONTRIBUTING.md + guide for adding a new source in 10 lines
 
 ## Week 5+ — Community Features
 - [ ] Day 21 — OpenAI blog source
