@@ -20,7 +20,7 @@
 - [x] Day 15 — Prompt tuning: improve summary quality, add "why it matters for devs" line
 
 ## Week 4 — Polish
-- [ ] Day 16 — Config file support: sources to track, API key, output format (YAML/TOML)
+- [x] Day 16 — Config file support: sources to track, API key, output format (YAML/TOML)
 - [ ] Day 17 — Export digest to Markdown file (feedwise digest --output report.md)
 - [ ] Day 18 — GitHub Actions workflow: run `feedwise fetch` daily on schedule
 - [ ] Day 19 — Full README with install guide, usage examples, screenshot
