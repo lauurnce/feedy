@@ -2,7 +2,7 @@ from datetime import datetime
 from unittest.mock import patch
 from click.testing import CliRunner
 from feedy.cli import cli
-from feedy.config import Config
+from feedy.config import Config, EmailConfig
 
 
 def _make_entries(source_name, count):
@@ -472,3 +472,89 @@ def test_digest_without_slack_does_not_send(mock_storage, mock_summarize, mock_b
     runner = CliRunner()
     runner.invoke(cli, ["digest"])
     mock_send.assert_not_called()
+
+
+def _email_cfg(**overrides):
+    base = dict(
+        host="smtp.example.com",
+        port=587,
+        username="user@example.com",
+        password="secret",
+        sender="user@example.com",
+        recipient="dest@example.com",
+    )
+    base.update(overrides)
+    return EmailConfig(**base)
+
+
+@patch.dict("os.environ", {}, clear=True)
+@patch("feedy.cli.send_email")
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_email_sends(mock_storage, mock_summarize, mock_build_digest, mock_load_config, mock_send_email):
+    mock_load_config.return_value = Config(email=_email_cfg())
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "digest body"
+    mock_send_email.return_value = True
+    runner = CliRunner()
+    result = runner.invoke(cli, ["digest", "--email", "--since", "2026-05-30"])
+    mock_send_email.assert_called_once()
+    args = mock_send_email.call_args.args
+    assert args[0] == "digest body"
+    assert args[1] == "feedy digest — 2026-05-30"
+    assert args[2].recipient == "dest@example.com"
+    assert "Digest emailed." in result.output
+
+
+@patch.dict("os.environ", {"FEEDY_SMTP_PASSWORD": "env-pw"}, clear=True)
+@patch("feedy.cli.send_email")
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_email_password_env_overrides(mock_storage, mock_summarize, mock_build_digest, mock_load_config, mock_send_email):
+    mock_load_config.return_value = Config(email=_email_cfg(password="config-pw"))
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "body"
+    mock_send_email.return_value = True
+    runner = CliRunner()
+    runner.invoke(cli, ["digest", "--email"])
+    assert mock_send_email.call_args.args[2].password == "env-pw"
+
+
+@patch.dict("os.environ", {}, clear=True)
+@patch("feedy.cli.send_email")
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_email_no_config_warns(mock_storage, mock_summarize, mock_build_digest, mock_load_config, mock_send_email):
+    mock_load_config.return_value = Config(email=None)
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "body"
+    runner = CliRunner()
+    result = runner.invoke(cli, ["digest", "--email"])
+    mock_send_email.assert_not_called()
+    assert "No email configured." in result.output
+
+
+@patch("feedy.cli.send_email")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_without_email_does_not_send(mock_storage, mock_summarize, mock_build_digest, mock_send_email):
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "body"
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_send_email.assert_not_called()
