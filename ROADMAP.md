@@ -27,7 +27,7 @@
 - [x] Day 20 — CONTRIBUTING.md + guide for adding a new source in 10 lines
 
 ## Week 5+ — Community Features
-- [ ] Day 21 — OpenAI blog source
+- [x] Day 21 — OpenAI blog source
 - [ ] Day 22 — Anthropic blog source
 - [ ] Day 23 — Slack webhook notification output
 - [ ] Day 24 — Email digest output (via SendGrid or SMTP)
