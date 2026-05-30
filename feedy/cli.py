@@ -1,13 +1,14 @@
 import os
 
 import click
+from dataclasses import replace
 from datetime import datetime
 from pathlib import Path
 
 import feedy.storage as storage
 from feedy.config import load_config
 from feedy.digest import build_digest
-from feedy.notify import send_to_slack
+from feedy.notify import send_email, send_to_slack
 from feedy.summarizer import summarize
 from feedy.sources.anthropic import AnthropicSource
 from feedy.sources.hackernews import HackerNewsSource
@@ -84,7 +85,8 @@ def list_entries(source, since):
 @click.option("--output", "-o", default=None, type=click.Path(dir_okay=False, writable=True),
               help="Write the digest to a file instead of printing it.")
 @click.option("--slack", is_flag=True, help="Send the digest to the configured Slack webhook.")
-def digest(since, source, output, slack):
+@click.option("--email", is_flag=True, help="Send the digest over SMTP to the configured recipient.")
+def digest(since, source, output, slack, email):
     """Generate and print today's AI digest."""
     if since is None:
         since = datetime.now().strftime("%Y-%m-%d")
@@ -106,7 +108,7 @@ def digest(since, source, output, slack):
     if output:
         Path(output).write_text(text + "\n", encoding="utf-8")
         click.echo(f"Digest written to {output}")
-    elif not slack:
+    elif not slack and not email:
         click.echo(text)
 
     if slack:
@@ -117,6 +119,18 @@ def digest(since, source, output, slack):
             click.echo("Digest sent to Slack.")
         else:
             click.echo("Failed to send digest to Slack.", err=True)
+
+    if email:
+        if config.email is None or not config.email.recipient:
+            click.echo("No email configured.", err=True)
+        else:
+            password = os.environ.get("FEEDY_SMTP_PASSWORD") or config.email.password
+            email_cfg = replace(config.email, password=password)
+            subject = f"feedy digest — {since}"
+            if send_email(text, subject, email_cfg):
+                click.echo("Digest emailed.")
+            else:
+                click.echo("Failed to send email.", err=True)
 
 
 if __name__ == "__main__":
