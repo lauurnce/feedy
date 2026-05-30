@@ -1,3 +1,5 @@
+import os
+
 import click
 from datetime import datetime
 from pathlib import Path
@@ -5,6 +7,7 @@ from pathlib import Path
 import feedy.storage as storage
 from feedy.config import load_config
 from feedy.digest import build_digest
+from feedy.notify import send_to_slack
 from feedy.summarizer import summarize
 from feedy.sources.anthropic import AnthropicSource
 from feedy.sources.hackernews import HackerNewsSource
@@ -80,7 +83,8 @@ def list_entries(source, since):
 @click.option("--source", default=None, help="Filter by source name.")
 @click.option("--output", "-o", default=None, type=click.Path(dir_okay=False, writable=True),
               help="Write the digest to a file instead of printing it.")
-def digest(since, source, output):
+@click.option("--slack", is_flag=True, help="Send the digest to the configured Slack webhook.")
+def digest(since, source, output, slack):
     """Generate and print today's AI digest."""
     if since is None:
         since = datetime.now().strftime("%Y-%m-%d")
@@ -102,8 +106,17 @@ def digest(since, source, output):
     if output:
         Path(output).write_text(text + "\n", encoding="utf-8")
         click.echo(f"Digest written to {output}")
-    else:
+    elif not slack:
         click.echo(text)
+
+    if slack:
+        webhook_url = os.environ.get("FEEDY_SLACK_WEBHOOK") or config.slack_webhook_url
+        if not webhook_url:
+            click.echo("No Slack webhook configured.", err=True)
+        elif send_to_slack(text, webhook_url):
+            click.echo("Digest sent to Slack.")
+        else:
+            click.echo("Failed to send digest to Slack.", err=True)
 
 
 if __name__ == "__main__":
