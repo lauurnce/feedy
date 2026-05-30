@@ -31,5 +31,5 @@
 - [x] Day 22 — Anthropic blog source
 - [x] Day 23 — Slack webhook notification output
 - [x] Day 24 — Email digest output (via SendGrid or SMTP)
-- [ ] Day 25 — Web UI: simple FastAPI endpoint that serves today's digest as JSON
+- [x] Day 25 — Web UI: simple FastAPI endpoint that serves today's digest as JSON
 ...
