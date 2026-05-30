@@ -133,5 +133,18 @@ def digest(since, source, output, slack, email):
                 click.echo("Failed to send email.", err=True)
 
 
+@cli.command()
+@click.option("--host", default="127.0.0.1", help="Host to bind the web server.")
+@click.option("--port", default=8000, type=int, help="Port to bind the web server.")
+def serve(host, port):
+    """Serve today's digest as JSON over HTTP."""
+    import uvicorn
+
+    from feedy.web import app
+
+    click.echo(f"Serving feedy API on http://{host}:{port}")
+    uvicorn.run(app, host=host, port=port)
+
+
 if __name__ == "__main__":
     cli()
