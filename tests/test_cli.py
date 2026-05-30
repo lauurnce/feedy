@@ -560,6 +560,26 @@ def test_digest_without_email_does_not_send(mock_storage, mock_summarize, mock_b
     mock_send_email.assert_not_called()
 
 
+def test_force_utf8_output_reconfigures_streams():
+    from unittest.mock import MagicMock
+    import feedy.cli as cli_mod
+
+    fake_out, fake_err = MagicMock(), MagicMock()
+    with patch.object(cli_mod.sys, "stdout", fake_out), patch.object(cli_mod.sys, "stderr", fake_err):
+        cli_mod._force_utf8_output()
+    fake_out.reconfigure.assert_called_once_with(encoding="utf-8", errors="replace")
+    fake_err.reconfigure.assert_called_once_with(encoding="utf-8", errors="replace")
+
+
+def test_force_utf8_output_tolerates_missing_reconfigure():
+    import io
+    import feedy.cli as cli_mod
+
+    # io.StringIO has no reconfigure; must not raise.
+    with patch.object(cli_mod.sys, "stdout", io.StringIO()), patch.object(cli_mod.sys, "stderr", io.StringIO()):
+        cli_mod._force_utf8_output()
+
+
 @patch("uvicorn.run")
 def test_serve_runs_uvicorn(mock_run):
     runner = CliRunner()

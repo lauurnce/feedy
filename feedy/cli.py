@@ -1,4 +1,5 @@
 import os
+import sys
 
 import click
 from dataclasses import replace
@@ -19,9 +20,22 @@ from feedy.sources.tiktok import TikTokSource
 from feedy.sources.x import XSource
 
 
+def _force_utf8_output() -> None:
+    """Make stdout/stderr UTF-8 so digests with special characters (e.g. the
+    non-breaking hyphen \\u2011) don't crash on Windows cp1252 consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except (ValueError, OSError):
+                pass
+
+
 @click.group()
 def cli():
     """feedy — developer blog feed aggregator."""
+    _force_utf8_output()
 
 
 def _build_sources(names):
