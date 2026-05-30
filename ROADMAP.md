@@ -29,7 +29,7 @@
 ## Week 5+ — Community Features
 - [x] Day 21 — OpenAI blog source
 - [x] Day 22 — Anthropic blog source
-- [ ] Day 23 — Slack webhook notification output
+- [x] Day 23 — Slack webhook notification output
 - [ ] Day 24 — Email digest output (via SendGrid or SMTP)
 - [ ] Day 25 — Web UI: simple FastAPI endpoint that serves today's digest as JSON
 ...
