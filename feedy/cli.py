@@ -8,6 +8,7 @@ from feedy.digest import build_digest
 from feedy.summarizer import summarize
 from feedy.sources.hackernews import HackerNewsSource
 from feedy.sources.meta import MetaSource
+from feedy.sources.openai import OpenAISource
 from feedy.sources.telegram import TelegramSource
 from feedy.sources.tiktok import TikTokSource
 
@@ -23,6 +24,7 @@ def _build_sources(names):
         "tiktok": TikTokSource,
         "meta": MetaSource,
         "hackernews": HackerNewsSource,
+        "openai": OpenAISource,
     }
     return [registry[name]() for name in names if name in registry]
 
