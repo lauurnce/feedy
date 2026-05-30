@@ -15,6 +15,7 @@ class Config:
     sources: list[str] = field(default_factory=lambda: list(DEFAULT_SOURCES))
     output_format: str = DEFAULT_OUTPUT_FORMAT
     api_key: str | None = None
+    slack_webhook_url: str | None = None
 
 
 def load_config(path: Path | None = None) -> Config:
@@ -29,4 +30,5 @@ def load_config(path: Path | None = None) -> Config:
         sources=data.get("sources", list(DEFAULT_SOURCES)),
         output_format=data.get("output_format", DEFAULT_OUTPUT_FORMAT),
         api_key=data.get("anthropic", {}).get("api_key"),
+        slack_webhook_url=data.get("slack", {}).get("webhook_url"),
     )
