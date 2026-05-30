@@ -1,18 +1,23 @@
 from __future__ import annotations
 
-from datetime import datetime
+from email.utils import parsedate_to_datetime
 
 import httpx
-from bs4 import BeautifulSoup
+from defusedxml.ElementTree import ParseError, fromstring
+from defusedxml.common import DefusedXmlException
 
 from feedy.sources.base import BaseFeedSource, FeedEntry
 
-_BASE_URL = "https://openai.com"
-_BLOG_URL = f"{_BASE_URL}/news/"
-_CARD_SELECTOR = 'a[href*="/index/"]'
+_FEED_URL = "https://openai.com/news/rss.xml"
 
 
 class OpenAISource(BaseFeedSource):
+    """OpenAI news from openai.com/news/rss.xml.
+
+    The HTML page (openai.com/news) is bot-blocked (403), but the RSS feed is
+    served openly, so we parse that instead.
+    """
+
     @property
     def name(self) -> str:
         return "openai"
@@ -20,7 +25,7 @@ class OpenAISource(BaseFeedSource):
     def fetch(self) -> list:
         try:
             response = httpx.get(
-                _BLOG_URL,
+                _FEED_URL,
                 timeout=10,
                 follow_redirects=True,
                 headers={"User-Agent": "Mozilla/5.0"},
@@ -34,22 +39,20 @@ class OpenAISource(BaseFeedSource):
     def parse(self, raw: list) -> list[dict]:
         if not raw:
             return []
-        soup = BeautifulSoup(raw[0], "html.parser")
-        cards = soup.select(_CARD_SELECTOR)
+        try:
+            root = fromstring(raw[0])
+        except (ParseError, DefusedXmlException):
+            return []
         results = []
-        for card in cards:
-            href = card.get("href", "")
-            if href.startswith("/"):
-                href = f"{_BASE_URL}{href}"
-            if not href:
-                continue
-            title_el = card.select_one("h3")
-            if not title_el:
+        for item in root.findall(".//item"):
+            title = (item.findtext("title") or "").strip()
+            link = (item.findtext("link") or "").strip()
+            if not title or not link:
                 continue
             results.append({
-                "title": title_el.get_text(strip=True),
-                "url": href,
-                "date": _parse_date(card.select_one("time")),
+                "title": title,
+                "url": link,
+                "date": _parse_date(item.findtext("pubDate")),
             })
         return results
 
@@ -63,16 +66,10 @@ class OpenAISource(BaseFeedSource):
         )
 
 
-def _parse_date(el) -> str:
-    if el is None:
+def _parse_date(raw: str | None) -> str:
+    if not raw:
         return ""
-    iso = el.get("datetime", "")
-    if iso:
-        try:
-            return datetime.fromisoformat(iso[:10]).strftime("%Y-%m-%d")
-        except ValueError:
-            return ""
     try:
-        return datetime.strptime(el.get_text(strip=True), "%b %d, %Y").strftime("%Y-%m-%d")
-    except ValueError:
+        return parsedate_to_datetime(raw).strftime("%Y-%m-%d")
+    except (TypeError, ValueError):
         return ""
