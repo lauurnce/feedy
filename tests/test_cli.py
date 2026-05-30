@@ -558,3 +558,13 @@ def test_digest_without_email_does_not_send(mock_storage, mock_summarize, mock_b
     runner = CliRunner()
     runner.invoke(cli, ["digest"])
     mock_send_email.assert_not_called()
+
+
+@patch("uvicorn.run")
+def test_serve_runs_uvicorn(mock_run):
+    runner = CliRunner()
+    result = runner.invoke(cli, ["serve", "--host", "0.0.0.0", "--port", "9001"])
+    assert result.exit_code == 0
+    mock_run.assert_called_once()
+    assert mock_run.call_args.kwargs["host"] == "0.0.0.0"
+    assert mock_run.call_args.kwargs["port"] == 9001
