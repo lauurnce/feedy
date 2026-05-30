@@ -16,6 +16,7 @@ from feedy.sources.meta import MetaSource
 from feedy.sources.openai import OpenAISource
 from feedy.sources.telegram import TelegramSource
 from feedy.sources.tiktok import TikTokSource
+from feedy.sources.x import XSource
 
 
 @click.group()
@@ -31,6 +32,7 @@ def _build_sources(names):
         "hackernews": HackerNewsSource,
         "openai": OpenAISource,
         "anthropic": AnthropicSource,
+        "x": XSource,
     }
     return [registry[name]() for name in names if name in registry]
 
