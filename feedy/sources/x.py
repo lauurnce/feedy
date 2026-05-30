@@ -7,12 +7,20 @@ from bs4 import BeautifulSoup
 
 from feedy.sources.base import BaseFeedSource, FeedEntry
 
-_BASE_URL = "https://developer.x.com"
-_BLOG_URL = f"{_BASE_URL}/en/blog"
-_CARD_SELECTOR = 'a[href*="/en/blog/"]'
+_BASE_URL = "https://docs.x.com"
+_BLOG_URL = f"{_BASE_URL}/changelog"
+_CONTENT_SELECTOR = '[data-component-part="update-content"]'
+_LABEL_SELECTOR = '[data-component-part="update-label"]'
 
 
 class XSource(BaseFeedSource):
+    """X (Twitter) developer changelog at docs.x.com/changelog.
+
+    The legacy developer.x.com blog is gone; the changelog is the live
+    equivalent. It is a single page of dated entries (no per-post pages), so
+    each entry URL is a deep-link anchor into the changelog.
+    """
+
     @property
     def name(self) -> str:
         return "x"
@@ -35,21 +43,20 @@ class XSource(BaseFeedSource):
         if not raw:
             return []
         soup = BeautifulSoup(raw[0], "html.parser")
-        cards = soup.select(_CARD_SELECTOR)
         results = []
-        for card in cards:
-            href = card.get("href", "")
-            if href.startswith("/"):
-                href = f"{_BASE_URL}{href}"
-            if not href:
-                continue
-            title_el = card.select_one("h3")
+        for content in soup.select(_CONTENT_SELECTOR):
+            title_el = content.select_one("h3")
             if not title_el:
                 continue
+            title = title_el.get_text(strip=True).replace("​", "").strip()
+            if not title:
+                continue
+            slug = title_el.get("id", "")
+            url = f"{_BLOG_URL}#{slug}" if slug else _BLOG_URL
             results.append({
-                "title": title_el.get_text(strip=True),
-                "url": href,
-                "date": _parse_date(card.select_one("time")),
+                "title": title,
+                "url": url,
+                "date": _parse_date(_find_label(content)),
             })
         return results
 
@@ -63,16 +70,23 @@ class XSource(BaseFeedSource):
         )
 
 
-def _parse_date(el) -> str:
-    if el is None:
-        return ""
-    iso = el.get("datetime", "")
-    if iso:
-        try:
-            return datetime.fromisoformat(iso[:10]).strftime("%Y-%m-%d")
-        except ValueError:
+def _find_label(content) -> str:
+    """Walk up from an update-content block to the row holding its date label."""
+    node = content
+    for _ in range(4):
+        node = node.parent
+        if node is None:
             return ""
+        label = node.select_one(_LABEL_SELECTOR)
+        if label:
+            return label.get_text(strip=True)
+    return ""
+
+
+def _parse_date(raw: str) -> str:
+    if not raw:
+        return ""
     try:
-        return datetime.strptime(el.get_text(strip=True), "%b %d, %Y").strftime("%Y-%m-%d")
+        return datetime.strptime(raw, "%b %d, %Y").strftime("%Y-%m-%d")
     except ValueError:
         return ""
