@@ -9,7 +9,7 @@ from feedy.sources.base import BaseFeedSource, FeedEntry
 
 _BASE_URL = "https://www.anthropic.com"
 _BLOG_URL = f"{_BASE_URL}/news"
-_CARD_SELECTOR = 'a[href*="/news/"]'
+_CARD_SELECTOR = 'a[href^="/news/"]'
 
 
 class AnthropicSource(BaseFeedSource):
@@ -35,20 +35,27 @@ class AnthropicSource(BaseFeedSource):
         if not raw:
             return []
         soup = BeautifulSoup(raw[0], "html.parser")
-        cards = soup.select(_CARD_SELECTOR)
         results = []
-        for card in cards:
+        seen = set()
+        for card in soup.select(_CARD_SELECTOR):
             href = card.get("href", "")
-            if href.startswith("/"):
-                href = f"{_BASE_URL}{href}"
             if not href:
                 continue
-            title_el = card.select_one("h3")
+            # Featured cards use a heading; grid cards use a title span whose
+            # hashed module class still contains "title".
+            title_el = card.find(["h1", "h2", "h3", "h4"]) or card.select_one('[class*="title"]')
             if not title_el:
                 continue
+            title = title_el.get_text(strip=True)
+            if not title:
+                continue
+            url = f"{_BASE_URL}{href}"
+            if url in seen:
+                continue
+            seen.add(url)
             results.append({
-                "title": title_el.get_text(strip=True),
-                "url": href,
+                "title": title,
+                "url": url,
                 "date": _parse_date(card.select_one("time")),
             })
         return results
@@ -66,12 +73,6 @@ class AnthropicSource(BaseFeedSource):
 def _parse_date(el) -> str:
     if el is None:
         return ""
-    iso = el.get("datetime", "")
-    if iso:
-        try:
-            return datetime.fromisoformat(iso[:10]).strftime("%Y-%m-%d")
-        except ValueError:
-            return ""
     try:
         return datetime.strptime(el.get_text(strip=True), "%b %d, %Y").strftime("%Y-%m-%d")
     except ValueError:
