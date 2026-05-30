@@ -11,11 +11,22 @@ DEFAULT_OUTPUT_FORMAT = "markdown"
 
 
 @dataclass
+class EmailConfig:
+    host: str
+    port: int = 587
+    username: str | None = None
+    password: str | None = None
+    sender: str | None = None
+    recipient: str | None = None
+
+
+@dataclass
 class Config:
     sources: list[str] = field(default_factory=lambda: list(DEFAULT_SOURCES))
     output_format: str = DEFAULT_OUTPUT_FORMAT
     api_key: str | None = None
     slack_webhook_url: str | None = None
+    email: EmailConfig | None = None
 
 
 def load_config(path: Path | None = None) -> Config:
@@ -31,4 +42,18 @@ def load_config(path: Path | None = None) -> Config:
         output_format=data.get("output_format", DEFAULT_OUTPUT_FORMAT),
         api_key=data.get("anthropic", {}).get("api_key"),
         slack_webhook_url=data.get("slack", {}).get("webhook_url"),
+        email=_load_email(data.get("email")),
+    )
+
+
+def _load_email(table: dict | None) -> EmailConfig | None:
+    if not table:
+        return None
+    return EmailConfig(
+        host=table.get("host", ""),
+        port=table.get("port", 587),
+        username=table.get("username"),
+        password=table.get("password"),
+        sender=table.get("sender"),
+        recipient=table.get("recipient"),
     )
