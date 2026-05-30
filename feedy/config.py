@@ -6,7 +6,7 @@ from pathlib import Path
 
 CONFIG_PATH = Path.home() / ".feedy" / "config.toml"
 
-DEFAULT_SOURCES = ["telegram", "tiktok", "meta", "hackernews", "openai"]
+DEFAULT_SOURCES = ["telegram", "tiktok", "meta", "hackernews", "openai", "anthropic"]
 DEFAULT_OUTPUT_FORMAT = "markdown"
 
 

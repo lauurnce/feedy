@@ -5,14 +5,14 @@ from feedy.config import Config, load_config
 
 def test_missing_file_returns_defaults(tmp_path):
     cfg = load_config(tmp_path / "nope.toml")
-    assert cfg.sources == ["telegram", "tiktok", "meta", "hackernews", "openai"]
+    assert cfg.sources == ["telegram", "tiktok", "meta", "hackernews", "openai", "anthropic"]
     assert cfg.output_format == "markdown"
     assert cfg.api_key is None
 
 
 def test_default_config_constructor():
     cfg = Config()
-    assert cfg.sources == ["telegram", "tiktok", "meta", "hackernews", "openai"]
+    assert cfg.sources == ["telegram", "tiktok", "meta", "hackernews", "openai", "anthropic"]
     assert cfg.output_format == "markdown"
     assert cfg.api_key is None
 
@@ -43,7 +43,7 @@ def test_partial_file_uses_defaults_for_missing_keys(tmp_path):
     path.write_text('output_format = "plain"\n', encoding="utf-8")
     cfg = load_config(path)
     assert cfg.output_format == "plain"
-    assert cfg.sources == ["telegram", "tiktok", "meta", "hackernews", "openai"]
+    assert cfg.sources == ["telegram", "tiktok", "meta", "hackernews", "openai", "anthropic"]
     assert cfg.api_key is None
 
 

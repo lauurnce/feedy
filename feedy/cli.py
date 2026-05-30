@@ -6,6 +6,7 @@ import feedy.storage as storage
 from feedy.config import load_config
 from feedy.digest import build_digest
 from feedy.summarizer import summarize
+from feedy.sources.anthropic import AnthropicSource
 from feedy.sources.hackernews import HackerNewsSource
 from feedy.sources.meta import MetaSource
 from feedy.sources.openai import OpenAISource
@@ -25,6 +26,7 @@ def _build_sources(names):
         "meta": MetaSource,
         "hackernews": HackerNewsSource,
         "openai": OpenAISource,
+        "anthropic": AnthropicSource,
     }
     return [registry[name]() for name in names if name in registry]
 
