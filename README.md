@@ -11,13 +11,16 @@ devs" line, courtesy of the Anthropic API.
 
 | Source       | Name in config | Site |
 | ------------ | -------------- | ---- |
+| X (Twitter)  | `x`            | docs.x.com/changelog |
 | Telegram     | `telegram`     | core.telegram.org/blog |
 | TikTok       | `tiktok`       | developers.tiktok.com/blog |
 | Meta         | `meta`         | developers.facebook.com/blog |
+| OpenAI       | `openai`       | openai.com/news |
+| Anthropic    | `anthropic`    | anthropic.com/news |
 | Hacker News  | `hackernews`   | news.ycombinator.com |
 
-More sources (X, OpenAI, Anthropic) are on the [roadmap](ROADMAP.md). Adding one
-takes about ten lines — see [CONTRIBUTING.md](CONTRIBUTING.md).
+All sources are enabled by default. Adding a new one takes about ten lines — see
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Install
 
@@ -58,6 +61,27 @@ feedy digest -o report.md                 # short flag
 When `--output` is given, the digest is written to the file instead of being
 printed to the terminal.
 
+### Deliver the digest
+
+```bash
+feedy digest --slack                       # post to a Slack incoming webhook
+feedy digest --email                       # send over SMTP to the recipient
+```
+
+`--slack` needs a webhook URL (`[slack] webhook_url` or `FEEDY_SLACK_WEBHOOK`).
+`--email` needs the `[email]` SMTP settings (password via `[email] password` or
+`FEEDY_SMTP_PASSWORD`). See [Configuration](#configuration).
+
+### Serve the digest as JSON
+
+```bash
+feedy serve                                # http://127.0.0.1:8000
+feedy serve --host 0.0.0.0 --port 9000
+```
+
+Exposes `GET /` (health) and `GET /digest?since=YYYY-MM-DD&source=NAME`, which
+returns today's saved entries as JSON.
+
 ## Configuration
 
 `feedy` reads an optional TOML config from `~/.feedy/config.toml`. If the file
@@ -67,7 +91,7 @@ is missing, sensible defaults are used (all sources enabled, Markdown output).
 # ~/.feedy/config.toml
 
 # Which sources to fetch and include in the digest.
-sources = ["telegram", "tiktok", "meta", "hackernews"]
+sources = ["x", "telegram", "tiktok", "meta", "openai", "anthropic", "hackernews"]
 
 # Digest format: "markdown" (default) or "plain".
 output_format = "markdown"
@@ -75,6 +99,21 @@ output_format = "markdown"
 [anthropic]
 # API key for AI summaries. The ANTHROPIC_API_KEY env var takes precedence.
 api_key = "sk-ant-..."
+
+[slack]
+# Incoming webhook URL for `feedy digest --slack`.
+# FEEDY_SLACK_WEBHOOK env var takes precedence.
+webhook_url = "https://hooks.slack.com/services/..."
+
+[email]
+# SMTP settings for `feedy digest --email`.
+# FEEDY_SMTP_PASSWORD env var takes precedence over `password`.
+host = "smtp.gmail.com"
+port = 587
+username = "you@example.com"
+password = "app-password"
+sender = "you@example.com"
+recipient = "you@example.com"
 ```
 
 ### API key
