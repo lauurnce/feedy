@@ -52,3 +52,15 @@ def test_empty_anthropic_table_gives_none_key(tmp_path):
     path.write_text("[anthropic]\n", encoding="utf-8")
     cfg = load_config(path)
     assert cfg.api_key is None
+
+
+def test_default_slack_webhook_is_none():
+    cfg = Config()
+    assert cfg.slack_webhook_url is None
+
+
+def test_reads_slack_webhook(tmp_path):
+    path = tmp_path / "config.toml"
+    path.write_text('[slack]\nwebhook_url = "https://hooks.slack.com/services/X"\n', encoding="utf-8")
+    cfg = load_config(path)
+    assert cfg.slack_webhook_url == "https://hooks.slack.com/services/X"

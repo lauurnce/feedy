@@ -403,3 +403,72 @@ def test_digest_output_short_flag(mock_storage, mock_summarize, mock_build_diges
         assert result.exit_code == 0
         import os
         assert os.path.exists("out.md")
+
+
+@patch.dict("os.environ", {}, clear=True)
+@patch("feedy.cli.send_to_slack")
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_slack_sends_to_webhook(mock_storage, mock_summarize, mock_build_digest, mock_load_config, mock_send):
+    mock_load_config.return_value = Config(slack_webhook_url="https://hooks.slack.com/services/X")
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "## Digest body"
+    mock_send.return_value = True
+    runner = CliRunner()
+    result = runner.invoke(cli, ["digest", "--slack"])
+    mock_send.assert_called_once_with("## Digest body", "https://hooks.slack.com/services/X")
+    assert "Digest sent to Slack." in result.output
+
+
+@patch.dict("os.environ", {"FEEDY_SLACK_WEBHOOK": "https://hooks.slack.com/services/ENV"}, clear=True)
+@patch("feedy.cli.send_to_slack")
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_slack_env_overrides_config(mock_storage, mock_summarize, mock_build_digest, mock_load_config, mock_send):
+    mock_load_config.return_value = Config(slack_webhook_url="https://hooks.slack.com/services/CONFIG")
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "body"
+    mock_send.return_value = True
+    runner = CliRunner()
+    runner.invoke(cli, ["digest", "--slack"])
+    mock_send.assert_called_once_with("body", "https://hooks.slack.com/services/ENV")
+
+
+@patch.dict("os.environ", {}, clear=True)
+@patch("feedy.cli.send_to_slack")
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_slack_no_url_warns(mock_storage, mock_summarize, mock_build_digest, mock_load_config, mock_send):
+    mock_load_config.return_value = Config(slack_webhook_url=None)
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "body"
+    runner = CliRunner()
+    result = runner.invoke(cli, ["digest", "--slack"])
+    mock_send.assert_not_called()
+    assert "No Slack webhook configured." in result.output
+
+
+@patch("feedy.cli.send_to_slack")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_without_slack_does_not_send(mock_storage, mock_summarize, mock_build_digest, mock_send):
+    entries = _make_digest_entries("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = "body"
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_send.assert_not_called()
