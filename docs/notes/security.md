@@ -10,3 +10,4 @@
 - Upstream data is never evaluated, templated or interpolated into anything executable.
 - The database holds fetched content and credentials-adjacent metadata; keep it user-readable only.
 - URLs from upstream are validated before use and never passed straight to a shell.
+- Where a subprocess is unavoidable, arguments are passed as a list, never as a shell string.
