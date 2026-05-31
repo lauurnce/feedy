@@ -13,3 +13,4 @@
 - Where a subprocess is unavoidable, arguments are passed as a list, never as a shell string.
 - Request the narrowest token scope an upstream offers; read access is usually enough.
 - Rotation touches the environment only, so it can happen without a code change or redeploy.
+- Test fixtures use obviously fake credentials so a leaked fixture is harmless.
