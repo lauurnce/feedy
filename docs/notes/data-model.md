@@ -5,3 +5,4 @@
 - Optional fields default to None so "not provided" stays distinguishable from "empty".
 - An upstream id must be stable across fetches, or deduplication silently stops working.
 - Timestamps are UTC at rest; local time exists only at the moment of display.
+- The source field holds the registry name, tying an entry back to the adapter that produced it.
