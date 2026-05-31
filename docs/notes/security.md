@@ -15,3 +15,4 @@
 - Rotation touches the environment only, so it can happen without a code change or redeploy.
 - Test fixtures use obviously fake credentials so a leaked fixture is harmless.
 - The committed lockfile pins the dependency set, which is the main supply-chain control here.
+- Security concerns go to the repository owner directly rather than into a public issue.
