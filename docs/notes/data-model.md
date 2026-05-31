@@ -7,3 +7,4 @@
 - Timestamps are UTC at rest; local time exists only at the moment of display.
 - The source field holds the registry name, tying an entry back to the adapter that produced it.
 - Titles are plain text. Markup in a title is stripped at the source boundary.
+- Bodies are stored exactly as fetched, so a rendering change never needs a re-fetch.
