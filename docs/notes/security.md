@@ -8,3 +8,4 @@
 - The web layer assumes a trusted network; exposing it publicly requires a proxy with auth.
 - Dependencies are updated deliberately, with the lockfile committed so builds stay reproducible.
 - Upstream data is never evaluated, templated or interpolated into anything executable.
+- The database holds fetched content and credentials-adjacent metadata; keep it user-readable only.
