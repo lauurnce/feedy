@@ -11,3 +11,4 @@
 - The URL field holds the canonical permalink, not a share, tracking or redirect link.
 - Author holds a display name where available and falls back to the upstream handle.
 - Summaries live in their own field so generated text is never confused with upstream text.
+- Derived values are computed on read; storing them invites the two copies to disagree.
