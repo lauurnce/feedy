@@ -12,3 +12,4 @@
 - URLs from upstream are validated before use and never passed straight to a shell.
 - Where a subprocess is unavoidable, arguments are passed as a list, never as a shell string.
 - Request the narrowest token scope an upstream offers; read access is usually enough.
+- Rotation touches the environment only, so it can happen without a code change or redeploy.
