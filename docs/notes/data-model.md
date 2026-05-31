@@ -9,3 +9,4 @@
 - Titles are plain text. Markup in a title is stripped at the source boundary.
 - Bodies are stored exactly as fetched, so a rendering change never needs a re-fetch.
 - The URL field holds the canonical permalink, not a share, tracking or redirect link.
+- Author holds a display name where available and falls back to the upstream handle.
