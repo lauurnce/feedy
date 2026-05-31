@@ -12,3 +12,4 @@
 - Author holds a display name where available and falls back to the upstream handle.
 - Summaries live in their own field so generated text is never confused with upstream text.
 - Derived values are computed on read; storing them invites the two copies to disagree.
+- Schema changes are forward-only and additive wherever a default can be supplied.
