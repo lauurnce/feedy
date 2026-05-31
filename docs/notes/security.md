@@ -5,3 +5,4 @@
 - Secrets are never logged, not even at debug level and not even partially masked.
 - Everything fetched from upstream is untrusted input and is treated as such downstream.
 - Any format that can execute markup escapes entry content before rendering it.
+- The web layer assumes a trusted network; exposing it publicly requires a proxy with auth.
