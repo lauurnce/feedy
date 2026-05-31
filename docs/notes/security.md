@@ -9,3 +9,4 @@
 - Dependencies are updated deliberately, with the lockfile committed so builds stay reproducible.
 - Upstream data is never evaluated, templated or interpolated into anything executable.
 - The database holds fetched content and credentials-adjacent metadata; keep it user-readable only.
+- URLs from upstream are validated before use and never passed straight to a shell.
