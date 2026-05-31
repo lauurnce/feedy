@@ -13,3 +13,4 @@
 - Summaries live in their own field so generated text is never confused with upstream text.
 - Derived values are computed on read; storing them invites the two copies to disagree.
 - Schema changes are forward-only and additive wherever a default can be supplied.
+- Tags are deliberately absent until there is a second consumer that actually needs them.
