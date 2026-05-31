@@ -6,3 +6,4 @@
 - An upstream id must be stable across fetches, or deduplication silently stops working.
 - Timestamps are UTC at rest; local time exists only at the moment of display.
 - The source field holds the registry name, tying an entry back to the adapter that produced it.
+- Titles are plain text. Markup in a title is stripped at the source boundary.
