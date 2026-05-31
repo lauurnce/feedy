@@ -7,3 +7,4 @@
 - Any format that can execute markup escapes entry content before rendering it.
 - The web layer assumes a trusted network; exposing it publicly requires a proxy with auth.
 - Dependencies are updated deliberately, with the lockfile committed so builds stay reproducible.
+- Upstream data is never evaluated, templated or interpolated into anything executable.
