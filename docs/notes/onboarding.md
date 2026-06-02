@@ -8,3 +8,4 @@
 - A first run needs no config at all; defaults are enough to fetch a public source.
 - Copy the simplest existing source, change the fetch and normalise steps, register the name.
 - Library code sits in one package, tests mirror it one file per module, docs sit alongside.
+- Design decisions and their reasoning live in these notes rather than in commit messages.
