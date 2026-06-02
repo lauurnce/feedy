@@ -10,3 +10,4 @@
 - Flat config is easier to read and diff; nesting is added only when a group genuinely exists.
 - No daemon, because cron and CI already solve scheduling better than a bespoke loop would.
 - Single-user scope keeps auth, permissions and concurrency entirely out of the design.
+- Plain text is the default because it is readable everywhere and never needs escaping.
