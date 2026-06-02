@@ -14,3 +14,4 @@
 - A digest never adds data; it is a read-only view over what a fetch already stored.
 - Ignore summarisation and delivery at first; fetch and list are enough to understand the shape.
 - Propose a change by writing the failing test first; it makes the intent concrete.
+- When stuck, read the troubleshooting notes before reading the code; most paths are covered.
