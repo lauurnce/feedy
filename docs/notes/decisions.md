@@ -13,3 +13,4 @@
 - Plain text is the default because it is readable everywhere and never needs escaping.
 - Offline tests are fast and deterministic, which matters more here than end-to-end realism.
 - Forward-only migrations halve the work and match how the tool is actually upgraded.
+- Cross-source dedup was rejected as guesswork; seeing the same story twice is informative.
