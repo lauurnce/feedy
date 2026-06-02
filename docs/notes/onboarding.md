@@ -6,3 +6,4 @@
 - The full suite runs offline in seconds, so run it before and after any change.
 - Dependencies come from the lockfile, which keeps every machine on the same versions.
 - A first run needs no config at all; defaults are enough to fetch a public source.
+- Copy the simplest existing source, change the fetch and normalise steps, register the name.
