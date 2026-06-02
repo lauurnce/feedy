@@ -11,3 +11,4 @@
 - No daemon, because cron and CI already solve scheduling better than a bespoke loop would.
 - Single-user scope keeps auth, permissions and concurrency entirely out of the design.
 - Plain text is the default because it is readable everywhere and never needs escaping.
+- Offline tests are fast and deterministic, which matters more here than end-to-end realism.
