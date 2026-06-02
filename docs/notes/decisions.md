@@ -4,3 +4,4 @@
 - No ORM: the queries are few and simple, and raw SQL keeps the data access obvious.
 - CLI-first because the primary use is a scheduled unattended run, not an interactive session.
 - Append-only storage means a bug in normalisation never destroys previously captured data.
+- UTC everywhere removes an entire class of bug at the cost of one conversion at display time.
