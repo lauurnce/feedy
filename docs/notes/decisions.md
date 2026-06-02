@@ -15,3 +15,4 @@
 - Forward-only migrations halve the work and match how the tool is actually upgraded.
 - Cross-source dedup was rejected as guesswork; seeing the same story twice is informative.
 - A registry lets the CLI resolve a source by name without importing every module up front.
+- A read-only API keeps one ingestion path, so there is only ever one way data enters.
