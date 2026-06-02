@@ -5,3 +5,4 @@
 - Read the CLI first; it names every capability and points at the module behind each one.
 - The full suite runs offline in seconds, so run it before and after any change.
 - Dependencies come from the lockfile, which keeps every machine on the same versions.
+- A first run needs no config at all; defaults are enough to fetch a public source.
