@@ -7,3 +7,4 @@
 - UTC everywhere removes an entire class of bug at the cost of one conversion at display time.
 - Summarisation is optional so the tool remains fully useful with no provider configured.
 - A single shared schema avoids translation layers between every pair of stages.
+- Flat config is easier to read and diff; nesting is added only when a group genuinely exists.
