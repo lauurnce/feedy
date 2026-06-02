@@ -12,3 +12,4 @@
 - Use `list` to see stored entries, or open the database file directly with any SQLite client.
 - The usual first stumble is pointing at the wrong database path and assuming data was lost.
 - A digest never adds data; it is a read-only view over what a fetch already stored.
+- Ignore summarisation and delivery at first; fetch and list are enough to understand the shape.
