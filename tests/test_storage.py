@@ -115,3 +115,23 @@ def test_get_entries_both_filters():
     entries = storage.get_entries(source="hackernews", since="2026-05-26")
     assert len(entries) == 1
     assert entries[0]["url"] == "https://a.com"
+
+
+def test_get_stats_returns_counts_per_source():
+    storage.save({"url": "https://a.com", "title": "A", "date": "2026-06-04", "source": "hackernews", "summary": ""})
+    storage.save({"url": "https://b.com", "title": "B", "date": "2026-06-04", "source": "hackernews", "summary": ""})
+    storage.save({"url": "https://c.com", "title": "C", "date": "2026-06-04", "source": "telegram", "summary": ""})
+    stats = storage.get_stats()
+    assert stats["hackernews"] == 2
+    assert stats["telegram"] == 1
+
+
+def test_get_stats_empty_db_returns_empty_dict():
+    stats = storage.get_stats()
+    assert stats == {}
+
+
+def test_get_stats_single_source():
+    storage.save({"url": "https://x.com/1", "title": "X", "date": "2026-06-04", "source": "x", "summary": ""})
+    stats = storage.get_stats()
+    assert stats == {"x": 1}

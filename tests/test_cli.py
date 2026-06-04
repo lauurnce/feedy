@@ -681,3 +681,24 @@ def test_digest_no_format_flag_uses_config(mock_storage, mock_summarize, mock_bu
     runner = CliRunner()
     runner.invoke(cli, ["digest"])
     mock_build_digest.assert_called_once_with(entries, "plain")
+
+
+@patch("feedy.cli.storage")
+def test_stats_shows_entry_counts(mock_storage):
+    mock_storage.get_stats.return_value = {"hackernews": 5, "telegram": 3}
+    runner = CliRunner()
+    result = runner.invoke(cli, ["stats"])
+    assert result.exit_code == 0
+    assert "hackernews" in result.output
+    assert "5" in result.output
+    assert "telegram" in result.output
+    assert "3" in result.output
+
+
+@patch("feedy.cli.storage")
+def test_stats_empty_db_shows_message(mock_storage):
+    mock_storage.get_stats.return_value = {}
+    runner = CliRunner()
+    result = runner.invoke(cli, ["stats"])
+    assert result.exit_code == 0
+    assert "No entries" in result.output
