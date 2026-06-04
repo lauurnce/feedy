@@ -588,3 +588,55 @@ def test_serve_runs_uvicorn(mock_run):
     mock_run.assert_called_once()
     assert mock_run.call_args.kwargs["host"] == "0.0.0.0"
     assert mock_run.call_args.kwargs["port"] == 9001
+
+
+def _make_digest_entries_fmt(source_name, count):
+    return [
+        {"url": f"https://{source_name}.com/{i}", "title": f"Title {i}", "date": "2026-06-04", "source": source_name, "summary": ""}
+        for i in range(count)
+    ]
+
+
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_format_flag_plain_overrides_config(mock_storage, mock_summarize, mock_build_digest, mock_load_config):
+    mock_load_config.return_value = Config(output_format="markdown")
+    entries = _make_digest_entries_fmt("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = ""
+    runner = CliRunner()
+    runner.invoke(cli, ["digest", "--format", "plain"])
+    mock_build_digest.assert_called_once_with(entries, "plain")
+
+
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_format_flag_markdown_overrides_config(mock_storage, mock_summarize, mock_build_digest, mock_load_config):
+    mock_load_config.return_value = Config(output_format="plain")
+    entries = _make_digest_entries_fmt("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = ""
+    runner = CliRunner()
+    runner.invoke(cli, ["digest", "--format", "markdown"])
+    mock_build_digest.assert_called_once_with(entries, "markdown")
+
+
+@patch("feedy.cli.load_config")
+@patch("feedy.cli.build_digest")
+@patch("feedy.cli.summarize")
+@patch("feedy.cli.storage")
+def test_digest_no_format_flag_uses_config(mock_storage, mock_summarize, mock_build_digest, mock_load_config):
+    mock_load_config.return_value = Config(output_format="plain")
+    entries = _make_digest_entries_fmt("hackernews", 1)
+    mock_storage.get_entries.return_value = entries
+    mock_summarize.return_value = entries
+    mock_build_digest.return_value = ""
+    runner = CliRunner()
+    runner.invoke(cli, ["digest"])
+    mock_build_digest.assert_called_once_with(entries, "plain")
