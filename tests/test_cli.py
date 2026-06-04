@@ -580,6 +580,21 @@ def test_force_utf8_output_tolerates_missing_reconfigure():
         cli_mod._force_utf8_output()
 
 
+def test_sources_lists_all_registered_sources():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["sources"])
+    assert result.exit_code == 0
+    for name in ["telegram", "tiktok", "meta", "hackernews", "openai", "anthropic", "x"]:
+        assert name in result.output
+
+
+def test_sources_one_name_per_line():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["sources"])
+    lines = [l.strip() for l in result.output.strip().splitlines() if l.strip()]
+    assert len(lines) == 7
+
+
 @patch("uvicorn.run")
 def test_serve_runs_uvicorn(mock_run):
     runner = CliRunner()
