@@ -80,6 +80,18 @@ def all_entries() -> list[dict]:
         conn.close()
 
 
+def get_stats() -> dict[str, int]:
+    """Return entry count per source, sorted by source name."""
+    conn = _connect()
+    try:
+        rows = conn.execute(
+            "SELECT source, COUNT(*) AS cnt FROM entries GROUP BY source ORDER BY source"
+        ).fetchall()
+        return {row["source"]: row["cnt"] for row in rows if row["source"]}
+    finally:
+        conn.close()
+
+
 def get_entries(source: str | None = None, since: str | None = None) -> list[dict]:
     conn = _connect()
     try:
