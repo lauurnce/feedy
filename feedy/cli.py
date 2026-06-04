@@ -102,7 +102,9 @@ def list_entries(source, since):
               help="Write the digest to a file instead of printing it.")
 @click.option("--slack", is_flag=True, help="Send the digest to the configured Slack webhook.")
 @click.option("--email", is_flag=True, help="Send the digest over SMTP to the configured recipient.")
-def digest(since, source, output, slack, email):
+@click.option("--format", "fmt", default=None, type=click.Choice(["plain", "markdown"]),
+              help="Output format (overrides config). Choices: plain, markdown.")
+def digest(since, source, output, slack, email, fmt):
     """Generate and print today's AI digest."""
     if since is None:
         since = datetime.now().strftime("%Y-%m-%d")
@@ -113,13 +115,14 @@ def digest(since, source, output, slack, email):
         return
 
     config = load_config()
+    output_format = fmt if fmt is not None else config.output_format
     summarized = summarize(entries)
 
     for original, updated in zip(entries, summarized):
         if updated["summary"] and updated["summary"] != original["summary"]:
             storage.update_summary(updated["url"], updated["summary"])
 
-    text = build_digest(summarized, config.output_format)
+    text = build_digest(summarized, output_format)
 
     if output:
         Path(output).write_text(text + "\n", encoding="utf-8")
