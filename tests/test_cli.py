@@ -225,6 +225,32 @@ def test_list_truncates_long_title(mock_storage):
     assert "A" * 60 not in result.output
 
 
+@patch("feedy.cli.storage")
+def test_list_limit_caps_output(mock_storage):
+    mock_storage.get_entries.return_value = [
+        _make_list_entry(i, "hackernews", "2026-06-04", f"Title {i}", f"https://hn.com/{i}")
+        for i in range(10)
+    ]
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list", "--limit", "3"])
+    assert result.exit_code == 0
+    rows = [l for l in result.output.splitlines() if "hn.com" in l]
+    assert len(rows) == 3
+
+
+@patch("feedy.cli.storage")
+def test_list_limit_zero_shows_all(mock_storage):
+    mock_storage.get_entries.return_value = [
+        _make_list_entry(i, "hackernews", "2026-06-04", f"Title {i}", f"https://hn.com/{i}")
+        for i in range(5)
+    ]
+    runner = CliRunner()
+    result = runner.invoke(cli, ["list", "--limit", "0"])
+    assert result.exit_code == 0
+    rows = [l for l in result.output.splitlines() if "hn.com" in l]
+    assert len(rows) == 5
+
+
 def _make_digest_entries(source_name, count):
     return [
         {"url": f"https://{source_name}.com/{i}", "title": f"Title {i}", "date": "2026-05-29", "source": source_name, "summary": ""}
