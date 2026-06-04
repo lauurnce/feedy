@@ -73,7 +73,8 @@ def fetch():
 @cli.command("list")
 @click.option("--source", default=None, help="Filter by source name.")
 @click.option("--since", default=None, help="Filter entries on or after date (YYYY-MM-DD).")
-def list_entries(source, since):
+@click.option("--limit", default=0, type=int, help="Max entries to show (0 = all).")
+def list_entries(source, since, limit):
     """List saved entries from the database."""
     if since is not None:
         try:
@@ -86,6 +87,9 @@ def list_entries(source, since):
     if not entries:
         click.echo("No entries found.")
         return
+
+    if limit > 0:
+        entries = entries[:limit]
 
     header = f"{'ID':<5} {'SOURCE':<13} {'DATE':<12} {'TITLE':<47} URL"
     click.echo(header)
