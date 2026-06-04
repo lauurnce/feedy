@@ -153,6 +153,13 @@ def digest(since, source, output, slack, email, fmt):
 
 
 @cli.command()
+def sources():
+    """List all registered source names."""
+    for name in ["anthropic", "hackernews", "meta", "openai", "telegram", "tiktok", "x"]:
+        click.echo(name)
+
+
+@cli.command()
 @click.option("--host", default="127.0.0.1", help="Host to bind the web server.")
 @click.option("--port", default=8000, type=int, help="Port to bind the web server.")
 def serve(host, port):
