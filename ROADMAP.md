@@ -26,10 +26,12 @@
 - [x] Day 19 — Full README with install guide, usage examples, screenshot
 - [x] Day 20 — CONTRIBUTING.md + guide for adding a new source in 10 lines
 
+
+
 ## Week 5+ — Community Features
 - [x] Day 21 — OpenAI blog source
 - [x] Day 22 — Anthropic blog source
 - [x] Day 23 — Slack webhook notification output
 - [x] Day 24 — Email digest output (via SendGrid or SMTP)
 - [x] Day 25 — Web UI: simple FastAPI endpoint that serves today's digest as JSON
-...
+- [x] Day 26 — CLI polish: `feedy sources`, `feedy stats`, `list --limit`, `digest --format`
