@@ -164,6 +164,18 @@ def sources():
 
 
 @cli.command()
+def stats():
+    """Show entry counts per source."""
+    counts = storage.get_stats()
+    if not counts:
+        click.echo("No entries found.")
+        return
+    width = max(len(s) for s in counts)
+    for source_name, count in counts.items():
+        click.echo(f"{source_name:<{width}}  {count}")
+
+
+@cli.command()
 @click.option("--host", default="127.0.0.1", help="Host to bind the web server.")
 @click.option("--port", default=8000, type=int, help="Port to bind the web server.")
 def serve(host, port):
