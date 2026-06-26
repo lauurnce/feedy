@@ -9,3 +9,4 @@
 - Normalising at the source boundary means every later stage sees one uniform shape.
 - One entry schema is shared end to end, so no stage needs a translation layer.
 - Network and disk access sit at the edges, leaving the middle pure and easy to test.
+- A flat module layout suits a project this size; packages are added only when a group earns one.
