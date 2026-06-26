@@ -14,3 +14,4 @@
 - Each run ends with a one-line summary of entries added per source.
 - Text entries are small; the database stays modest until backfill is used aggressively.
 - No daemon. The tool starts, does its work and exits, which suits cron and CI alike.
+- After a failure, check which source reported it before looking anywhere else.
