@@ -5,3 +5,4 @@
 - Dependencies point inward toward storage; nothing in storage knows about sources or output.
 - One entry point means one place where arguments, config and errors are handled.
 - No module-level mutable state. State lives in storage or is passed explicitly.
+- Library modules return data; the CLI and web layer decide how to present it.
