@@ -15,3 +15,4 @@
 - Single-process keeps failure modes simple; concurrency is a cost paid only when needed.
 - A module imports downward only. Circular imports signal a missing boundary.
 - Renderers register by name, so adding a format never touches the digest logic.
+- One broken source degrades one feed. The run continues and reports what failed.
