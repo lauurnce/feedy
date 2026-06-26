@@ -7,3 +7,4 @@
 - No module-level mutable state. State lives in storage or is passed explicitly.
 - Library modules return data; the CLI and web layer decide how to present it.
 - Normalising at the source boundary means every later stage sees one uniform shape.
+- One entry schema is shared end to end, so no stage needs a translation layer.
