@@ -11,3 +11,4 @@
 - Storage grows monotonically. Check the file size occasionally rather than assuming it is small.
 - Writes key on upstream id, so running fetch twice in a row changes nothing.
 - An upstream outage is reported and skipped; it is not a reason to fail the whole run.
+- Each run ends with a one-line summary of entries added per source.
