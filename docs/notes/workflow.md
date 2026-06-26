@@ -6,3 +6,4 @@
 - Small commits are easier to review, revert and bisect when something breaks later.
 - The scope in a prefix names the module touched, which makes log filtering useful.
 - Multi-step work gets a short plan document before code, kept alongside the repo.
+- Refactors ship separately from behaviour changes so a revert stays surgical.
