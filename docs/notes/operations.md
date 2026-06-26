@@ -9,3 +9,4 @@
 - A routine run never migrates schema or deletes data; both are explicit manual actions.
 - Rotating a credential means updating the environment; no code or database change is needed.
 - Storage grows monotonically. Check the file size occasionally rather than assuming it is small.
+- Writes key on upstream id, so running fetch twice in a row changes nothing.
