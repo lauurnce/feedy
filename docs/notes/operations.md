@@ -12,3 +12,4 @@
 - Writes key on upstream id, so running fetch twice in a row changes nothing.
 - An upstream outage is reported and skipped; it is not a reason to fail the whole run.
 - Each run ends with a one-line summary of entries added per source.
+- Text entries are small; the database stays modest until backfill is used aggressively.
