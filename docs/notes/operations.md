@@ -15,3 +15,4 @@
 - Text entries are small; the database stays modest until backfill is used aggressively.
 - No daemon. The tool starts, does its work and exits, which suits cron and CI alike.
 - After a failure, check which source reported it before looking anywhere else.
+- Alerting belongs to the scheduler. The tool's job is to exit honestly.
