@@ -16,3 +16,4 @@
 - No daemon. The tool starts, does its work and exits, which suits cron and CI alike.
 - After a failure, check which source reported it before looking anywhere else.
 - Alerting belongs to the scheduler. The tool's job is to exit honestly.
+- Config is validated up front, so a bad setting fails before any upstream is contacted.
