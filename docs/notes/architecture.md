@@ -16,3 +16,4 @@
 - A module imports downward only. Circular imports signal a missing boundary.
 - Renderers register by name, so adding a format never touches the digest logic.
 - One broken source degrades one feed. The run continues and reports what failed.
+- This is a personal aggregator. Multi-user concerns stay deliberately out of scope.
