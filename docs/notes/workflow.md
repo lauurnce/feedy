@@ -8,3 +8,4 @@
 - Multi-step work gets a short plan document before code, kept alongside the repo.
 - Refactors ship separately from behaviour changes so a revert stays surgical.
 - Before pushing: tests pass, the tree is clean and the branch is current with origin.
+- Linear history keeps the log readable and makes bisecting straightforward.
