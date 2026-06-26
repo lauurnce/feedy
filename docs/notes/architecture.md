@@ -13,3 +13,4 @@
 - New capability means a new module plus registration, not edits scattered across existing ones.
 - Abstractions are introduced at the second use case, never speculatively at the first.
 - Single-process keeps failure modes simple; concurrency is a cost paid only when needed.
+- A module imports downward only. Circular imports signal a missing boundary.
