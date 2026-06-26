@@ -10,3 +10,4 @@
 - Before pushing: tests pass, the tree is clean and the branch is current with origin.
 - Linear history keeps the log readable and makes bisecting straightforward.
 - Documentation changes use a docs prefix so they filter cleanly out of a code review.
+- Unfinished work stays local. Only complete, tested changes reach the shared branch.
