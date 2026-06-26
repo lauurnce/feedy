@@ -8,3 +8,4 @@
 - Library modules return data; the CLI and web layer decide how to present it.
 - Normalising at the source boundary means every later stage sees one uniform shape.
 - One entry schema is shared end to end, so no stage needs a translation layer.
+- Network and disk access sit at the edges, leaving the middle pure and easy to test.
