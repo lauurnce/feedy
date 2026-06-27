@@ -8,3 +8,4 @@
 - Batch only when per-call overhead is measurable; otherwise it just obscures error attribution.
 - Concurrency across sources is tempting but adds failure modes; add it only if runs get slow.
 - Rendering is cheap and in-memory; it is never the bottleneck in a run.
+- Unbounded reads are fine today and dangerous later; limit at the call site as a habit.
