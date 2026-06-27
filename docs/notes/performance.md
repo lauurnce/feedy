@@ -10,3 +10,4 @@
 - Rendering is cheap and in-memory; it is never the bottleneck in a run.
 - Unbounded reads are fine today and dangerous later; limit at the call site as a habit.
 - Reads stay fast as the database grows, provided the filter columns remain indexed.
+- Storing full text costs disk but removes any need to re-fetch, which is the better trade.
