@@ -12,3 +12,4 @@
 - Reads stay fast as the database grows, provided the filter columns remain indexed.
 - Storing full text costs disk but removes any need to re-fetch, which is the better trade.
 - A suite that runs in seconds gets run constantly; that is worth protecting.
+- Time each source separately before touching code; the culprit is usually obvious.
