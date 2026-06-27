@@ -16,3 +16,4 @@
 - Generated artefacts are ignored; the repository holds sources, not build output.
 - Prefer a revert commit to an amend once a change has been shared.
 - If the message needs the word "and", it is probably two commits.
+- Finish with a clean tree; stray modified files are how unrelated changes get shipped.
