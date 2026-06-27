@@ -15,3 +15,4 @@
 - Check the tests fail first, the naming matches, and no unrelated file crept in.
 - Generated artefacts are ignored; the repository holds sources, not build output.
 - Prefer a revert commit to an amend once a change has been shared.
+- If the message needs the word "and", it is probably two commits.
