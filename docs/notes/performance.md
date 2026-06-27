@@ -6,3 +6,4 @@
 - Keying the cache on upstream id means the same item is never summarised twice.
 - Index what is filtered on. Source and timestamp cover almost every query the tool makes.
 - Batch only when per-call overhead is measurable; otherwise it just obscures error attribution.
+- Concurrency across sources is tempting but adds failure modes; add it only if runs get slow.
