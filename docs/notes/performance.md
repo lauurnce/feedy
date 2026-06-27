@@ -7,3 +7,4 @@
 - Index what is filtered on. Source and timestamp cover almost every query the tool makes.
 - Batch only when per-call overhead is measurable; otherwise it just obscures error attribution.
 - Concurrency across sources is tempting but adds failure modes; add it only if runs get slow.
+- Rendering is cheap and in-memory; it is never the bottleneck in a run.
