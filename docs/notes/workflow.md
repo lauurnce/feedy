@@ -13,3 +13,4 @@
 - Unfinished work stays local. Only complete, tested changes reach the shared branch.
 - Never mix a fix, a refactor and a rename; the diff stops being reviewable.
 - Check the tests fail first, the naming matches, and no unrelated file crept in.
+- Generated artefacts are ignored; the repository holds sources, not build output.
