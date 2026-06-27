@@ -4,3 +4,4 @@
 - Nearly all run time is network wait; local processing is negligible by comparison.
 - Summarisation dominates cost when enabled, which is why results are cached with the entry.
 - Keying the cache on upstream id means the same item is never summarised twice.
+- Index what is filtered on. Source and timestamp cover almost every query the tool makes.
