@@ -15,3 +15,4 @@
 - Time each source separately before touching code; the culprit is usually obvious.
 - One transaction per fetch batch beats one per row, and it is the only batching that clearly pays.
 - A run holds one fetch in memory at a time, which keeps the footprint flat as history grows.
+- Add paging when a single response starts feeling slow to render, not before.
