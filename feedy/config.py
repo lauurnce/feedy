@@ -9,6 +9,27 @@ from pathlib import Path
 CONFIG_PATH = Path.home() / ".feedy" / "config.toml"
 
 DEFAULT_SOURCES = ["telegram", "tiktok", "meta", "hackernews", "openai", "anthropic", "x"]
+
+# VC Sources (opt-in - add to your config.toml sources list)
+VC_SOURCES = [
+    # Tier 1 - Mega Funds
+    "sequoia",
+    "sequoia-inference",
+    "a16z",
+    "a16z-substack",
+    "ycombinator",
+    "firstround",
+    "firstround-news",
+    # Tier 2 - Top Tier Funds
+    "greylock",
+    "lightspeed",
+    "index",
+    "usv",
+    "foundersfund",
+    "khosla",
+    "nea",
+]
+
 DEFAULT_OUTPUT_FORMAT = "markdown"
 
 

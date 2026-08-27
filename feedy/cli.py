@@ -13,13 +13,27 @@ from feedy.config import load_config
 from feedy.digest import build_digest
 from feedy.notify import send_email, send_to_slack
 from feedy.summarizer import summarize
+from feedy.sources.a16z import A16ZSource
+from feedy.sources.a16z_substack import A16ZSubstackSource
 from feedy.sources.anthropic import AnthropicSource
+from feedy.sources.foundersfund import FoundersFundSource
+from feedy.sources.firstround import FirstRoundSource
+from feedy.sources.firstround_news import FirstRoundNewsSource
+from feedy.sources.greylock import GreylockSource
 from feedy.sources.hackernews import HackerNewsSource
+from feedy.sources.index import IndexSource
+from feedy.sources.khosla import KhoslaSource
+from feedy.sources.lightspeed import LightspeedSource
 from feedy.sources.meta import MetaSource
+from feedy.sources.nea import NEASource
 from feedy.sources.openai import OpenAISource
+from feedy.sources.sequoia import SequoiaSource
+from feedy.sources.sequoia_inference import SequoiaInferenceSource
 from feedy.sources.telegram import TelegramSource
 from feedy.sources.tiktok import TikTokSource
+from feedy.sources.usv import USVSource
 from feedy.sources.x import XSource
+from feedy.sources.ycombinator import YCombinatorSource
 
 
 def _force_utf8_output() -> None:
@@ -43,6 +57,7 @@ def cli():
 def _build_sources(names):
     """Instantiate sources by name from the registry, skipping names that are not registered."""
     registry = {
+        # Original sources
         "telegram": TelegramSource,
         "tiktok": TikTokSource,
         "meta": MetaSource,
@@ -50,6 +65,22 @@ def _build_sources(names):
         "openai": OpenAISource,
         "anthropic": AnthropicSource,
         "x": XSource,
+        # VC Sources - Tier 1
+        "sequoia": SequoiaSource,
+        "sequoia-inference": SequoiaInferenceSource,
+        "a16z": A16ZSource,
+        "a16z-substack": A16ZSubstackSource,
+        "ycombinator": YCombinatorSource,
+        "firstround": FirstRoundSource,
+        "firstround-news": FirstRoundNewsSource,
+        # VC Sources - Tier 2
+        "greylock": GreylockSource,
+        "lightspeed": LightspeedSource,
+        "index": IndexSource,
+        "usv": USVSource,
+        "foundersfund": FoundersFundSource,
+        "khosla": KhoslaSource,
+        "nea": NEASource,
     }
     return [registry[name]() for name in names if name in registry]
 
@@ -162,7 +193,31 @@ def digest(since, source, output, slack, email, fmt):
 @cli.command()
 def sources():
     """List all registered source names."""
-    for name in ["anthropic", "hackernews", "meta", "openai", "telegram", "tiktok", "x"]:
+    for name in [
+        "anthropic",
+        "hackernews",
+        "meta",
+        "openai",
+        "telegram",
+        "tiktok",
+        "x",
+        # VC Sources - Tier 1
+        "sequoia",
+        "sequoia-inference",
+        "a16z",
+        "a16z-substack",
+        "ycombinator",
+        "firstround",
+        "firstround-news",
+        # VC Sources - Tier 2
+        "greylock",
+        "lightspeed",
+        "index",
+        "usv",
+        "foundersfund",
+        "khosla",
+        "nea",
+    ]:
         click.echo(name)
 
 

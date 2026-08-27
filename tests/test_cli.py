@@ -618,7 +618,7 @@ def test_sources_one_name_per_line():
     runner = CliRunner()
     result = runner.invoke(cli, ["sources"])
     lines = [l.strip() for l in result.output.strip().splitlines() if l.strip()]
-    assert len(lines) == 7
+    assert len(lines) == 21
 
 
 @patch("uvicorn.run")
