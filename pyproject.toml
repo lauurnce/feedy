@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "feedy"
 version = "0.1.0"
-description = "Developer blog feed aggregator with AI summaries"
+description = "Developer blog and VC news aggregator with AI summaries"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

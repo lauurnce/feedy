@@ -22,6 +22,10 @@ All notable changes to this project are recorded here.
 - Read-only JSON API serving stored entries.
 - TOML configuration at `~/.feedy/config.toml` with env var precedence.
 - Scheduled daily fetch workflow with database caching between runs.
+- Opt-in VC firm sources: Sequoia Capital, Sequoia Inference, a16z, a16z
+  Substack, Y Combinator, First Round Capital, First Round News, Greylock,
+  Lightspeed, Index Ventures, Union Square Ventures, Founders Fund, Khosla
+  Ventures, and NEA.
 
 ### Notes
 

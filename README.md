@@ -1,13 +1,15 @@
 # feedy
 
-Developer blog feed aggregator with AI-powered summaries.
+Developer blog and VC news aggregator with AI-powered summaries.
 
-`feedy` scrapes developer blogs from platforms you care about, stores new posts
-in a local SQLite database (deduplicated by URL), and turns them into a concise
-daily digest — each item summarized in two sentences plus a "why it matters for
-devs" line, courtesy of the Anthropic API.
+`feedy` scrapes developer blogs and venture capital firm blogs from sources you
+care about, stores new posts in a local SQLite database (deduplicated by URL),
+and turns them into a concise daily digest — each item summarized in two
+sentences plus a "why it matters for devs" line, courtesy of the Anthropic API.
 
 ## Sources
+
+### Developer platforms (enabled by default)
 
 | Source       | Name in config | Site |
 | ------------ | -------------- | ---- |
@@ -19,8 +21,33 @@ devs" line, courtesy of the Anthropic API.
 | Anthropic    | `anthropic`    | anthropic.com/news |
 | Hacker News  | `hackernews`   | news.ycombinator.com |
 
-All sources are enabled by default. Adding a new one takes about ten lines — see
-[CONTRIBUTING.md](CONTRIBUTING.md).
+### VC firms (opt-in — add to `sources` in your config)
+
+Add any of these names to the `sources` list in `~/.feedy/config.toml` to
+include them in `fetch` and `digest`. See [Configuration](#configuration).
+
+| Firm | Name in config | Site |
+| ---- | --------------- | ---- |
+| Sequoia Capital | `sequoia` | sequoiacap.com |
+| Sequoia Capital (Inference) | `sequoia-inference` | inferencebysequoia.substack.com |
+| Andreessen Horowitz | `a16z` | a16z.com |
+| Andreessen Horowitz (Substack) | `a16z-substack` | a16z.news |
+| Y Combinator | `ycombinator` | ycombinator.com/blog |
+| First Round Capital | `firstround` | review.firstround.com |
+| First Round Capital (News) | `firstround-news` | firstround.com/news |
+| Greylock | `greylock` | greylock.com |
+| Lightspeed | `lightspeed` | lsvp.com |
+| Index Ventures | `index` | indexventures.com |
+| Union Square Ventures | `usv` | usv.com |
+| Founders Fund | `foundersfund` | foundersfund.com |
+| Khosla Ventures | `khosla` | khoslaventures.com |
+| NEA | `nea` | nea.com |
+
+Run `feedy sources` to list every registered source name from the CLI.
+
+All developer-platform sources are enabled by default; VC sources are opt-in
+so digests stay focused unless you ask for them. Adding a new source takes
+about ten lines — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Install
 
@@ -46,6 +73,7 @@ feedy digest                     # print today's AI digest
 
 ```bash
 feedy list --source hackernews            # only one source
+feedy list --source sequoia               # works for VC sources too
 feedy list --since 2026-05-01             # on or after a date (YYYY-MM-DD)
 feedy digest --since 2026-05-01           # digest over a date range
 feedy digest --source meta                # digest for one source
@@ -85,12 +113,16 @@ returns today's saved entries as JSON.
 ## Configuration
 
 `feedy` reads an optional TOML config from `~/.feedy/config.toml`. If the file
-is missing, sensible defaults are used (all sources enabled, Markdown output).
+is missing, sensible defaults are used (developer-platform sources enabled,
+VC sources opt-in, Markdown output).
 
 ```toml
 # ~/.feedy/config.toml
 
 # Which sources to fetch and include in the digest.
+# Defaults to the developer-platform sources; add VC firm names (e.g. "sequoia",
+# "a16z", "ycombinator") to also pull VC news. Run `feedy sources` for the
+# full list of registered names.
 sources = ["x", "telegram", "tiktok", "meta", "openai", "anthropic", "hackernews"]
 
 # Digest format: "markdown" (default) or "plain".
